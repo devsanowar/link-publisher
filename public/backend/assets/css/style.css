@@ -1,0 +1,382 @@
+/* ===============================
+   Root Variables and Base Styles
+   =============================== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --primary: #1c2359;
+  --secondary: #f96363;
+  --background: #ffffff;
+  --font-family: "Inter", sans-serif;
+  --text: #212529;
+  --text-para: #5c5f71;
+  --heading: #0056b3;
+  --muted: #adb5bd;
+  --transition: 0.3s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--white-color);
+}
+p {
+  margin-bottom: 0px;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style: none;
+}
+/* ===============================
+   Common Utility Classes
+   =============================== */
+.hospital-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  text-align: center;
+  transition: var(--transition);
+  cursor: pointer;
+}
+/* primary btn */
+.hospital-btn-primary {
+  background-color: var(--secondary) !important;
+}
+.hospital-btn-primary:hover {
+  background-color: var(--primary) !important;
+}
+/* secondary btn */
+.hospital-btn-secondary {
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+.hospital-btn-secondary:hover {
+  background-color: var(--secondary) !important;
+  background-color: #fff;
+  border: 1px solid var(--secondary);
+}
+.section-title h4 {
+  color: var(--secondary);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.section-title .section-heading-title {
+  color: var(--primary);
+  font-size: 40px;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+.section-title p {
+  color: var(--text-para);
+  margin-bottom: 30px;
+}
+/* ===============================
+   Header Styles
+   =============================== */
+/* ===============================
+   Registration Styles
+   =============================== */
+.register-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fed1bf;
+  text-align: center;
+}
+.register-forms {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.95
+  ); /* soft white background with slight transparency */
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1); /* smooth shadow */
+  border-radius: 10px; /* rounded corners */
+  padding: 10px 30px; /* internal spacing */
+  margin: 10px auto; /* spacing around */
+  max-width: 1200px; /* optional max width for layout control */
+}
+
+.bg-avatar {
+  background-image: url("/assets/images/register.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100%;
+}
+.bg-avatar2 {
+  background-image: url("/assets/images/login.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100%;
+}
+
+.form-control {
+  border-radius: 0.375rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+.form-content {
+  text-align: left;
+}
+.form-content .signup-title-text {
+  font-size: 16x !important;
+}
+/* Remove full border, keep bottom only */
+.border-bottom-only {
+  border: none;
+  border-bottom: 2px solid #007bff;
+  border-radius: 0;
+  padding-left: 35px;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.border-bottom-only:focus {
+  border-bottom-color: #0056b3;
+  box-shadow: none;
+}
+
+/* Left-side icons */
+.icon-left {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #007bff;
+}
+
+/* Base spacing and form styling */
+.custom-form {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+/* Input field styles */
+.border-bottom-only {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  padding: 12px 12px 12px 44px;
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+  font-size: 14px;
+  width: 100%;
+}
+
+.border-bottom-only:focus {
+  border-bottom-color: #fc6527;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Left icon */
+.icon-left {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fc6527;
+  font-size: 18px;
+}
+
+/* Role selection layout */
+.role-select {
+  margin-top: 10px;
+}
+
+.custom-role-btns {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.role-option {
+  flex: 1 1 45%;
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  background-color: #f9f9f9;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.role-option input[type="radio"] {
+  display: none;
+}
+
+.role-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+  color: #444;
+}
+
+.role-content i {
+  font-size: 22px;
+  margin-bottom: 6px;
+  color: #777;
+}
+
+/* Selected state */
+.role-option input[type="radio"]:checked + .role-content {
+  background-color: #fc6527;
+  border-radius: 8px;
+  color: #fff;
+  padding: 6px;
+}
+
+.role-option input[type="radio"]:checked + .role-content i {
+  color: #fff;
+}
+
+/* Hover effect */
+.role-option:hover {
+  border-color: #fc6527;
+}
+
+.btn-primary-custom {
+  background: linear-gradient(135deg, #fc6527, #e35400);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(252, 101, 39, 0.5);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.btn-primary-custom:hover,
+.btn-primary-custom:focus {
+  background: linear-gradient(135deg, #e35400, #b73e00);
+  box-shadow: 0 6px 18px rgba(252, 101, 39, 0.7);
+  outline: none;
+}
+
+.btn-google-custom {
+  border: 2px solid #fc6527;
+  color: #fc6527;
+  font-weight: 600;
+  padding: 10px 0;
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.btn-google-custom i {
+  font-size: 20px;
+}
+
+.btn-google-custom:hover,
+.btn-google-custom:focus {
+  background-color: #fc6527;
+  color: white;
+  border-color: #fc6527;
+  outline: none;
+}
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #777;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 20px 0;
+  user-select: none;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ccc;
+  margin: 0 12px;
+  opacity: 0.6;
+}
+
+.login-text {
+  font-size: 15px;
+  color: #555;
+  margin-top: 1rem;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-text a {
+  color: #fc6527;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.login-text a:hover,
+.login-text a:focus {
+  color: #e35400;
+  text-decoration: underline;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ----------------------
+Login Page Styles
+------------------------- */
+/* Forgot Password Link */
+.forgot-link {
+  color: #fc6527;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+  color: #e35400;
+}
+
+/* Remember Me Checkbox Alignment */
+.custom-control-label {
+  font-size: 14px;
+  color: #555;
+  padding-left: 4px;
+  user-select: none;
+}

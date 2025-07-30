@@ -150,22 +150,9 @@
                 @endif
             </div>
 
-
             <!-- Login -->
             <button type="submit" class="btn btn-orange w-100 mb-3">Login</button>
 
-            <hr class="my-3">
-            <div>OR</div>
-            <hr class="my-3">
-
-            <!-- Google -->
-            <button type="button" class="btn google-btn w-100 mb-3">
-                <i class="bi bi-google me-2"></i> Register with Google
-            </button>
-
-            <!-- Sign up -->
-            <p class="mt-3">Don’t have an account? <a href="#" class="text-decoration-none text-danger">Sign up
-                    for free</a></p>
         </form>
     </div>
 
