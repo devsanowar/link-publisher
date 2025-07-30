@@ -7,29 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Dashboard | Link Publisher </title>
 
-    <!-- Bootstrap CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="assets/css/all.min.css" rel="stylesheet">
-
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-
-    <!-- Custom CSS -->
-    <link href="assets/css/style.css" rel="stylesheet">
-
-    <!-- Dashboard CSS -->
-    <link href="assets/css/dashboard.css" rel="stylesheet">
-
-    <!-- Favicon (Optional) -->
-    <link rel="icon" href="assets/images/favicon.png" type="image/png">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-        }
-    </style>
+    @include('publisher.layouts.inc.style')
 </head>
 
 <body>
