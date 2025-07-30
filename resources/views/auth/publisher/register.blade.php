@@ -99,7 +99,7 @@
 
                                 <!-- Login Link -->
                                 <p class="login-text">
-                                    Already have an account? <a href="login.html">Login here</a>
+                                    Already have an account? <a href="{{ route('loginForm') }}">Login here</a>
                                 </p>
 
                             </form>

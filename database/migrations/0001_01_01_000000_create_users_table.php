@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->enum('role', ['admin', 'user', 'customer', 'advisor', 'publisher'])->default('user');
+            $table->enum('system_admin', ['admin', 'user', 'customer', 'advisor', 'publisher'])->default('user');
             $table->string('phone', 20)->nullable();
             $table->string('country')->nullable();
             $table->string('agency')->nullable();
