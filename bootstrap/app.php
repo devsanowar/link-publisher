@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\isPublisher;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -19,7 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'ispublisher' => isPublisher::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

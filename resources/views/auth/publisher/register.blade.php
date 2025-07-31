@@ -8,15 +8,15 @@
     <title>Register | Link Publisher </title>
 
     <!-- Bootstrap CSS -->
-    <link href="{{ asset('backend') }}/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('publisher') }}/assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="{{ asset('backend') }}/assets/css/all.min.css" rel="stylesheet">
+    <link href="{{ asset('publisher') }}/assets/css/all.min.css" rel="stylesheet">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <!-- Custom CSS -->
-    <link href="{{ asset('backend') }}/assets/css/style.css" rel="stylesheet">
+    <link href="{{ asset('publisher') }}/assets/css/style.css" rel="stylesheet">
     <!-- Favicon (Optional) -->
-    <link rel="icon" href="{{ asset('backend') }}/assets/images/favicon.png" type="image/png">
+    <link rel="icon" href="{{ asset('publisher') }}/assets/images/favicon.png" type="image/png">
 
 
 </head>
@@ -33,7 +33,7 @@
                 </div> -->
                 <div class="container-fluid  register-forms">
                     <div class="mb-2 text-center">
-                        <a href="index.html"><img src="{{ asset('backend') }}/assets/images/logo.png" alt="Logo" class="img-fluid rounded"></a>
+                        <a href="index.html"><img src="{{ asset('publisher') }}/assets/images/logo.png" alt="Logo" class="img-fluid rounded"></a>
                     </div>
                     <div class="row no-gutters   rounded overflow-hidden ">
                         <!-- Left Column -->
@@ -108,7 +108,7 @@
                         </div>
 
                         <!-- Right Column (Avatar Image) -->
-                        <div class="col-lg-6 bg-avatar d-none d-lg-block" style="background-image: url('{{ asset('backend') }}/assets/images/register.png');"></div>
+                        <div class="col-lg-6 bg-avatar d-none d-lg-block" style="background-image: url('{{ asset('publisher') }}/assets/images/register.png');"></div>
                     </div>
                 </div>
 
@@ -119,13 +119,13 @@
 
 
     <!-- Bootstrap JS (with Popper) -->
-    <script src="{{ asset('backend') }}/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('publisher') }}/assets/js/bootstrap.bundle.min.js"></script>
 
     <!-- Font Awesome -->
-    <script src="{{ asset('backend') }}/assets/js/all.min.js"></script>
+    <script src="{{ asset('publisher') }}/assets/js/all.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="{{ asset('backend') }}/assets/js/script.js"></script>
+    <script src="{{ asset('publisher') }}/assets/js/script.js"></script>
 
 </body>
 </html>
