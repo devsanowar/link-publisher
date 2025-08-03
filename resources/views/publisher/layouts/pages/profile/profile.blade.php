@@ -26,29 +26,29 @@
             </div>
             <!-- Password change section -->
             <div class="password-section" id="passwordSection">
-                <button class="btn password-toggle-btn" id="togglePasswordBtn" onclick="togglePasswordForm()">Change
-                    Password</button>
+    <button class="btn password-toggle-btn" id="togglePasswordBtn" onclick="togglePasswordForm()">Change Password</button>
 
-                <div id="passwordForm" style="display:none; margin-top: 15px;">
-                    <div style="margin-bottom: 10px;">
-                        <input type="password" placeholder="Current Password" id="currentPassword" class="password-input">
-                    </div>
-                    <div style="margin-bottom: 10px;">
-                        <input type="password" placeholder="New Password" id="newPassword" class="password-input">
-                    </div>
-                    <div style="margin-bottom: 10px;">
-                        <input type="password" placeholder="Confirm New Password" id="confirmPassword"
-                            class="password-input">
-                    </div>
+    <div id="passwordForm" style="display:none; margin-top: 15px;">
+        <div style="margin-bottom: 10px;">
+            <input type="password" placeholder="Current Password" id="currentPassword" class="password-input">
+        </div>
+        <div style="margin-bottom: 10px;">
+            <input type="password" placeholder="New Password" id="newPassword" class="password-input">
+        </div>
+        <div style="margin-bottom: 10px;">
+            <input type="password" placeholder="Confirm New Password" id="confirmPassword" class="password-input">
+        </div>
 
-                    <div class="password-btn-group">
-                        <button onclick="savePassword()" class="btn btn-update">Update</button>
-                        <button onclick="togglePasswordForm()" class="btn btn-cancel-style">Cancel</button>
-                    </div>
+        <div class="password-btn-group">
+            <button onclick="savePassword()" class="btn btn-update">Update</button>
+            <button onclick="togglePasswordForm()" class="btn btn-cancel-style">Cancel</button>
+        </div>
 
-                    <div id="passwordError" class="password-error-msg"></div>
-                </div>
-            </div>
+        <div id="passwordError" class="password-error-msg" style="color:red; margin-top:10px;"></div>
+        <div id="passwordSuccess" class="password-success-msg" style="color:green; margin-top:10px; display:none;"></div>
+    </div>
+</div>
+
 
 
 
@@ -188,54 +188,90 @@
 
     <!-- password change features -->
     <script>
-        let isPasswordFormVisible = false;
+    let isPasswordFormVisible = false;
 
-        function togglePasswordForm() {
-            const form = document.getElementById('passwordForm');
-            const toggleBtn = document.getElementById('togglePasswordBtn');
+    function togglePasswordForm() {
+        const form = document.getElementById('passwordForm');
+        const errorDiv = document.getElementById('passwordError');
+        const successDiv = document.getElementById('passwordSuccess');
 
-            isPasswordFormVisible = !isPasswordFormVisible;
+        isPasswordFormVisible = !isPasswordFormVisible;
 
-            form.style.display = isPasswordFormVisible ? 'block' : 'none';
-            // toggleBtn.innerText = isPasswordFormVisible ? 'Cancel Password Change' : 'Change Password';
+        form.style.display = isPasswordFormVisible ? 'block' : 'none';
 
-            if (!isPasswordFormVisible) clearPasswordForm();
-        }
-
-        function savePassword() {
-            const current = document.getElementById('currentPassword').value.trim();
-            const newPass = document.getElementById('newPassword').value.trim();
-            const confirm = document.getElementById('confirmPassword').value.trim();
-            const errorDiv = document.getElementById('passwordError');
-
+        if (!isPasswordFormVisible) {
+            clearPasswordForm();
             errorDiv.innerText = '';
+            successDiv.style.display = 'none';
+            successDiv.innerText = '';
+        }
+    }
 
-            if (!current || !newPass || !confirm) {
-                errorDiv.innerText = 'All fields are required.';
-                return;
-            }
+    function clearPasswordForm() {
+        document.getElementById('currentPassword').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmPassword').value = '';
+    }
 
-            if (newPass.length < 6) {
-                errorDiv.innerText = 'New password must be at least 6 characters.';
-                return;
-            }
+    function savePassword() {
+        const current = document.getElementById('currentPassword').value.trim();
+        const newPass = document.getElementById('newPassword').value.trim();
+        const confirm = document.getElementById('confirmPassword').value.trim();
+        const errorDiv = document.getElementById('passwordError');
+        const successDiv = document.getElementById('passwordSuccess');
 
-            if (newPass !== confirm) {
-                errorDiv.innerText = 'Passwords do not match.';
-                return;
-            }
+        errorDiv.innerText = '';
+        successDiv.style.display = 'none';
+        successDiv.innerText = '';
 
-            alert('Password updated successfully!');
-            togglePasswordForm();
+        if (!current || !newPass || !confirm) {
+            errorDiv.innerText = 'All fields are required.';
+            return;
         }
 
-        function clearPasswordForm() {
-            document.getElementById('currentPassword').value = '';
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmPassword').value = '';
-            document.getElementById('passwordError').innerText = '';
+        if (newPass.length < 6) {
+            errorDiv.innerText = 'New password must be at least 6 characters.';
+            return;
         }
-    </script>
+
+        if (newPass !== confirm) {
+            errorDiv.innerText = 'Passwords do not match.';
+            return;
+        }
+
+        // AJAX call to update password
+        fetch('{{ route("profile.password.update") }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                current_password: current,
+                new_password: newPass,
+                new_password_confirmation: confirm,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                successDiv.style.display = 'block';
+                successDiv.innerText = data.message || 'Password updated successfully!';
+                clearPasswordForm();
+                setTimeout(() => {
+                    togglePasswordForm();
+                }, 2000); // 2 seconds after success, hide form
+            } else {
+                errorDiv.innerText = data.message || 'Failed to update password.';
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            errorDiv.innerText = 'An error occurred. Please try again.';
+        });
+    }
+</script>
 
 
     <script>

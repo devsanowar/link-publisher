@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Publisher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Laravel\Facades\Image;
 
 class ProfileSettingController extends Controller
@@ -84,6 +85,36 @@ class ProfileSettingController extends Controller
             422,
         );
     }
+
+
+public function updatePassword(Request $request)
+{
+    $request->validate([
+        'current_password' => 'required',
+        'new_password' => 'required|min:6|confirmed',
+    ]);
+
+    $user = auth()->user();
+
+    // Check current password
+    if (!Hash::check($request->current_password, $user->password)) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Current password is incorrect.'
+        ]);
+    }
+
+    // Update new password
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Password updated successfully!'
+    ]);
+
+}
+
 
 
     public function publisherLogout(Request $request){

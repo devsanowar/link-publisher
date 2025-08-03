@@ -21,5 +21,7 @@ Route::prefix('publisher')->group(function () {
         Route::post('/profile/update', [ProfileSettingController::class, 'update'])->name('profile.update');
         Route::post('/update-image', [ProfileSettingController::class, 'updateImage'])->name('publisher.update-image');
         Route::post('/logout', [ProfileSettingController::class, 'publisherLogout'])->name('publisher.logout');
+        // Route::post('/update-password', [ProfileSettingController::class, 'updatePassword'])->name('publisher.updatePassword');
+Route::post('/profile/password-update', [ProfileSettingController::class, 'updatePassword'])->name('profile.password.update');
     });
 });
