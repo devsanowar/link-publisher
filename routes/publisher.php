@@ -20,5 +20,6 @@ Route::prefix('publisher')->group(function () {
         Route::get('profile', [ProfileSettingController::class, 'index'])->name('publisher.profile');
         Route::post('/profile/update', [ProfileSettingController::class, 'update'])->name('profile.update');
         Route::post('/update-image', [ProfileSettingController::class, 'updateImage'])->name('publisher.update-image');
+        Route::post('/logout', [ProfileSettingController::class, 'publisherLogout'])->name('publisher.logout');
     });
 });

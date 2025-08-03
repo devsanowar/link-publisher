@@ -17,12 +17,12 @@
             <!-- Message placeholder -->
             <div id="imageMessage"></div>
 
-            <h3>MD EMON HOWLADER</h3>
-            <p>Publisher</p>
+            <h3>{{ Auth::user()->name }}</h3>
+            <p>{{ Auth::user()->system_admin }}</p>
             <div class="profile-status">
                 <span class="active">Status: Active</span>
                 <span class="balance">Balance: $0</span>
-                <span>Joined on 28 July 2025</span>
+                <span>{{ Auth::user()->created_at->format('d F Y') }}</span>
             </div>
             <!-- Password change section -->
             <div class="password-section" id="passwordSection">

@@ -9,14 +9,24 @@
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-user-circle fs-4 me-2"></i>
-            <strong>MD EMON HOWLADER</strong>
+            <strong>{{ Auth::user()->name }}</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="profileDropdown">
             <li><a class="dropdown-item" href="{{ route('publisher.profile') }}">Profile</a></li>
             <li>
                 <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="register.html">Logout</a></li>
+            <li>
+                <a class="dropdown-item" href="#"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+
+                <form id="logout-form" action="{{ route('publisher.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
         </ul>
+
     </div>
 </div>

@@ -85,6 +85,16 @@ class ProfileSettingController extends Controller
         );
     }
 
+
+    public function publisherLogout(Request $request){
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('loginForm');
+    }
+
     private function publisherImage(Request $request)
     {
         if ($request->hasFile('image')) {
