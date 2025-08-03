@@ -1,0 +1,626 @@
+/* ===============================
+   Root Variables and Base Styles
+   =============================== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --primary: #1c2359;
+  --secondary: #f96363;
+  --background: #ffffff;
+  --font-family: "Inter", sans-serif;
+  --text: #212529;
+  --text-para: #5c5f71;
+  --heading: #0056b3;
+  --muted: #adb5bd;
+  --transition: 0.3s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--white-color);
+}
+p {
+  margin-bottom: 0px;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style: none;
+}
+/* ===============================
+   Common Utility Classes
+   =============================== */
+.hospital-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  text-align: center;
+  transition: var(--transition);
+  cursor: pointer;
+}
+/* primary btn */
+.hospital-btn-primary {
+  background-color: var(--secondary) !important;
+}
+.hospital-btn-primary:hover {
+  background-color: var(--primary) !important;
+}
+/* secondary btn */
+.hospital-btn-secondary {
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+.hospital-btn-secondary:hover {
+  background-color: var(--secondary) !important;
+  background-color: #fff;
+  border: 1px solid var(--secondary);
+}
+.section-title h4 {
+  color: var(--secondary);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.section-title .section-heading-title {
+  color: var(--primary);
+  font-size: 40px;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+.section-title p {
+  color: var(--text-para);
+  margin-bottom: 30px;
+}
+/* ===============================
+   Header Styles
+   =============================== */
+/* ===============================
+   Registration Styles
+   =============================== */
+.register-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fed1bf;
+  text-align: center;
+}
+.register-forms {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.95
+  ); /* soft white background with slight transparency */
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1); /* smooth shadow */
+  border-radius: 10px; /* rounded corners */
+  padding: 10px 30px; /* internal spacing */
+  margin: 10px auto; /* spacing around */
+  max-width: 1200px; /* optional max width for layout control */
+}
+
+.bg-avatar {
+  background-image: url("/assets/images/register.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100%;
+}
+.bg-avatar2 {
+  background-image: url("/assets/images/login.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100%;
+}
+
+.form-control {
+  border-radius: 0.375rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+.form-content {
+  text-align: left;
+}
+.form-content .signup-title-text {
+  font-size: 16x !important;
+}
+/* Remove full border, keep bottom only */
+.border-bottom-only {
+  border: none;
+  border-bottom: 2px solid #007bff;
+  border-radius: 0;
+  padding-left: 35px;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.border-bottom-only:focus {
+  border-bottom-color: #0056b3;
+  box-shadow: none;
+}
+
+/* Left-side icons */
+.icon-left {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #007bff;
+}
+
+/* Base spacing and form styling */
+.custom-form {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+/* Input field styles */
+.border-bottom-only {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  padding: 12px 12px 12px 44px;
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+  font-size: 14px;
+  width: 100%;
+}
+
+.border-bottom-only:focus {
+  border-bottom-color: #fc6527;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Left icon */
+.icon-left {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fc6527;
+  font-size: 18px;
+}
+
+/* Role selection layout */
+.role-select {
+  margin-top: 10px;
+}
+
+.custom-role-btns {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.role-option {
+  flex: 1 1 45%;
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  background-color: #f9f9f9;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.role-option input[type="radio"] {
+  display: none;
+}
+
+.role-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+  color: #444;
+}
+
+.role-content i {
+  font-size: 22px;
+  margin-bottom: 6px;
+  color: #777;
+}
+
+/* Selected state */
+.role-option input[type="radio"]:checked + .role-content {
+  background-color: #fc6527;
+  border-radius: 8px;
+  color: #fff;
+  padding: 6px;
+}
+
+.role-option input[type="radio"]:checked + .role-content i {
+  color: #fff;
+}
+
+/* Hover effect */
+.role-option:hover {
+  border-color: #fc6527;
+}
+
+.btn-primary-custom {
+  background: linear-gradient(135deg, #fc6527, #e35400);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(252, 101, 39, 0.5);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.btn-primary-custom:hover,
+.btn-primary-custom:focus {
+  background: linear-gradient(135deg, #e35400, #b73e00);
+  box-shadow: 0 6px 18px rgba(252, 101, 39, 0.7);
+  outline: none;
+}
+
+.btn-google-custom {
+  border: 2px solid #fc6527;
+  color: #fc6527;
+  font-weight: 600;
+  padding: 10px 0;
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.btn-google-custom i {
+  font-size: 20px;
+}
+
+.btn-google-custom:hover,
+.btn-google-custom:focus {
+  background-color: #fc6527;
+  color: white;
+  border-color: #fc6527;
+  outline: none;
+}
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #777;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 20px 0;
+  user-select: none;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ccc;
+  margin: 0 12px;
+  opacity: 0.6;
+}
+
+.login-text {
+  font-size: 15px;
+  color: #555;
+  margin-top: 1rem;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-text a {
+  color: #fc6527;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.login-text a:hover,
+.login-text a:focus {
+  color: #e35400;
+  text-decoration: underline;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ----------------------
+Login Page Styles
+------------------------- */
+/* Forgot Password Link */
+.forgot-link {
+  color: #fc6527;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+  color: #e35400;
+}
+
+/* Remember Me Checkbox Alignment */
+.custom-control-label {
+  font-size: 14px;
+  color: #555;
+  padding-left: 4px;
+  user-select: none;
+}
+
+/*
+Publisher profile css
+*/
+
+      .profile-container {
+            display: flex;
+            gap: 30px;
+            max-width: 100%;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            /* height: 100%; */
+        }
+
+        .profile-sidebar {
+            background: #dddd;
+            padding: 30px 20px;
+            border-radius: 12px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .profile-sidebar h3 {
+            font-size: 20px;
+        }
+
+        .profile-img {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .profile-img input[type="file"] {
+            display: none;
+        }
+
+        .profile-img label {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #fc6527;
+            color: #fff;
+            padding: 6px 8px;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            border: 2px solid #fff;
+        }
+
+        .profile-img img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #eee;
+        }
+
+        .profile-status {
+            margin: 20px 0;
+        }
+
+        .profile-status span {
+            display: block;
+            margin: 6px 0;
+            font-size: 15px;
+        }
+
+        .profile-status .active {
+            color: green;
+            font-weight: bold;
+        }
+
+        .profile-status .balance {
+            color: #fc6527;
+            font-weight: 600;
+        }
+
+        .password-section {
+            margin-top: 20px;
+        }
+
+        .password-section a {
+            color: #fc6527;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        .password-input:focus {
+            border-color: #fc6527;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(252, 101, 39, 0.2);
+        }
+
+        .password-toggle-btn {
+            width: 100%;
+            text-align: center;
+            background: #fc6527;
+            color: #fff;
+            border: 2px solid #fc6527;
+            padding: 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .password-toggle-btn:hover {
+            background: #fff;
+            color: #fc6527;
+        }
+
+        .password-btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            gap: 10px;
+        }
+
+        .btn-update {
+            background-color: #fc6527;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: background 0.3s;
+        }
+
+        .btn-update:hover {
+            background-color: #e4571d;
+        }
+
+        .btn-cancel-style {
+            background-color: #f1f1f1;
+            color: #444;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: background 0.3s;
+        }
+
+        .btn-cancel-style:hover {
+            background-color: #ddd;
+        }
+
+        .password-error-msg {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+
+
+        .profile-main {
+            flex-grow: 1;
+        }
+
+        .section {
+            background: #ddd;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .edit-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            font-size: 14px;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-edit {
+            background-color: transparent;
+            color: #fc6527;
+            font-weight: bold;
+        }
+
+        .btn-save {
+            background-color: #fc6527;
+            color: white;
+            display: none;
+        }
+
+        .btn-cancel {
+            background-color: #eee;
+            display: none;
+        }
+
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 8px 0;
+            align-items: center;
+        }
+
+        .info-label {
+            width: 160px;
+            font-weight: 500;
+        }
+
+        .info-value {
+            flex: 1;
+            color: #555;
+        }
+
+        .info-value input {
+            width: 100%;
+            padding: 6px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
