@@ -9,10 +9,14 @@
         <!-- Sidebar -->
         <div class="profile-sidebar">
             <div class="profile-img">
-                <img src="https://i.pravatar.cc/110?u=1" id="profilePic" alt="Profile">
+                <img src="{{ asset(Auth::user()->image) }}" id="profilePic" alt="Profile">
                 <label for="uploadImg">📷</label>
                 <input type="file" id="uploadImg" accept="image/*">
             </div>
+
+            <!-- Message placeholder -->
+            <div id="imageMessage"></div>
+
             <h3>MD EMON HOWLADER</h3>
             <p>Publisher</p>
             <div class="profile-status">
@@ -141,64 +145,47 @@
             });
         }
     </script>
-    <script>
-        // Profile image upload
-        document.getElementById('uploadImg').addEventListener('change', function(e) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                document.getElementById('profilePic').src = reader.result;
-            }
-            reader.readAsDataURL(e.target.files[0]);
+<script>
+    document.getElementById('uploadImg').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Show preview instantly
+        const reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById('profilePic').src = reader.result;
+        }
+        reader.readAsDataURL(file);
+
+        // Upload via AJAX
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('_token', '{{ csrf_token() }}');
+
+        fetch("{{ route('publisher.update-image') }}", {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(res => {
+            const msgDiv = document.getElementById('imageMessage');
+            msgDiv.innerHTML = `
+                <div class="alert alert-${res.status === 'success' ? 'success' : 'danger'} alert-dismissible fade show" role="alert">
+                    ${res.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+            setTimeout(() => {
+                msgDiv.querySelector('.alert')?.classList.remove('show');
+                setTimeout(() => msgDiv.innerHTML = '', 300);
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('Upload failed', err);
         });
+    });
+</script>
 
-        const originalData = {};
-
-        function enableEdit(sectionId) {
-            const section = document.getElementById(sectionId);
-            section.querySelectorAll('.info-value').forEach(el => {
-                const key = el.getAttribute('data-key');
-                const value = el.textContent.trim();
-                el.innerHTML = `<input type="text" name="${key}" value="${value}" class="form-control">`;
-            });
-
-            section.querySelector('.btn-edit').style.display = 'none';
-            section.querySelector('.btn-save').style.display = 'inline-block';
-            section.querySelector('.btn-cancel').style.display = 'inline-block';
-        }
-
-
-        // function saveEdit(sectionId) {
-        //     const section = document.getElementById(sectionId);
-        //     const inputs = section.querySelectorAll('input');
-        //     inputs.forEach(input => {
-        //         const key = input.name;
-        //         const parent = input.parentElement;
-        //         parent.textContent = input.value;
-        //     });
-        //     toggleButtons(sectionId, false);
-        // }
-
-        function cancelEdit(sectionId) {
-            const section = document.getElementById(sectionId);
-            section.querySelectorAll('.info-value').forEach(el => {
-                const key = el.getAttribute('data-key');
-                const original = el.querySelector('input').value;
-                el.textContent = original;
-            });
-
-            section.querySelector('.btn-edit').style.display = 'inline-block';
-            section.querySelector('.btn-save').style.display = 'none';
-            section.querySelector('.btn-cancel').style.display = 'none';
-        }
-
-
-        function toggleButtons(sectionId, editing) {
-            const section = document.getElementById(sectionId);
-            section.querySelector('.btn-edit').style.display = editing ? 'none' : 'inline-block';
-            section.querySelector('.btn-save').style.display = editing ? 'inline-block' : 'none';
-            section.querySelector('.btn-cancel').style.display = editing ? 'inline-block' : 'none';
-        }
-    </script>
     <!-- password change features -->
     <script>
         let isPasswordFormVisible = false;

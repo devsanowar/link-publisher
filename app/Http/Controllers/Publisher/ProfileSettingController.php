@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Publisher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ProfileSettingController extends Controller
 {
@@ -41,8 +42,66 @@ class ProfileSettingController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Profile updated successfully!'
+            'message' => 'Profile updated successfully!',
+        ]);
+    }
+
+    public function updateImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $user = Auth::user();
+
+        $publisherProfileImage = $this->publisherImage($request); // returns image path
+        if ($publisherProfileImage) {
+            // Delete old image
+            if ($user->image) {
+                $oldPublisherImage = public_path($user->image);
+                if (file_exists($oldPublisherImage)) {
+                    unlink($oldPublisherImage);
+                }
+            }
+
+            // Update image path in DB
+            $user->update([
+                'image' => $publisherProfileImage,
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Profile image updated successfully!',
+                'image_url' => asset($publisherProfileImage), // Correct image URL
+            ]);
+        }
+
+        return response()->json(
+            [
+                'status' => 'error',
+                'message' => 'Image upload failed.',
+            ],
+            422,
+        );
+    }
+
+    private function publisherImage(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            $image = Image::read($request->file('image'));
+            $imageName = time() . '-' . $request->file('image')->getClientOriginalName();
+            $destinationPath = public_path('uploads/publisher-image/');
+
+            // Ensure the directory exists
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+
+            $image->save($destinationPath . $imageName);
+
+            return 'uploads/publisher-image/' . $imageName; // Return relative path
+        }
+
+        return null;
     }
 }
