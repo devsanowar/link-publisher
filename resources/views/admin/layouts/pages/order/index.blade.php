@@ -66,7 +66,7 @@
 
 
 @php
-    $orderAmountSum = App\Models\Order::sum('total_price');
+    $orderAmountSum = App\Models\WebsiteOrder::sum('pricing');
 @endphp
 
 
@@ -110,10 +110,9 @@
                                     <select name="status" id="status" class="form-control show-tick" style="width: 40%">
                                         <option value="">All</option>
                                         <option value="pending">Pending</option>
-                                        <option value="cancelled">Cancelled</option>
-                                        <option value="confirmed">Confirmed</option>
-                                        <option value="shipped">Shipped</option>
-                                        <option value="delivered">Delivered</option>
+                                        <option value="inreview">In review</option>
+                                        <option value="rejected">Rejected</option>
+                                        <option value="approved">Approved</option>
                                     </select>
                                 </div>
 
@@ -129,11 +128,12 @@
                             <thead>
                                 <tr>
                                     <th style="width: 30px">S/N</th>
-                                    <th style="width: 60px">Date</th>
-                                    <th style="width: 70px">Order No</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    {{-- <th>Address</th> --}}
+                                    <th>Website URL</th>
+                                    <th>Website category</th>
+                                    <th>language</th>
+                                    <th>Traffic</th>
+                                    <th>Domain Authority</th>
+                                    <th>domain_rating</th>
                                     <th>Amount</th>
                                     <th style="width: 194px">Status</th>
                                     <th>Action</th>
@@ -142,6 +142,7 @@
 
                             <tfoot>
                                 <th style="width: 30px">S/N</th>
+                                <th style="width: 60px"></th>
                                 <th style="width: 60px"></th>
                                 <th style="width: 60px"></th>
                                 <th></th>
@@ -156,11 +157,13 @@
                                 @foreach ($orders as $key => $item)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
-                                        <td>#{{ $item->order_id }}</td>
-                                        <td>{{ $item->first_name . ' ' . $item->last_name }}</td>
-                                        <td>{{ $item->phone }}</td>
-                                        <td>{{ $item->total_price }}</td>
+                                        <td>{{ $item->website_url }}</td>
+                                        <td>{{ $item->website_category}}</td>
+                                        <td>{{ $item->website_language }}</td>
+                                        <td>{{ $item->monthly_traffic }}</td>
+                                        <td>{{ $item->domain_authority }}</td>
+                                        <td>{{ $item->domain_rating }}</td>
+                                        <td>{{ $item->pricing }}</td>
 
                                         <td>
                                             <form class="order-status-form d-inline-block" data-id="{{ $item->id }}">
@@ -171,10 +174,10 @@
                                                             <select name="status"
                                                                 class="form-control status-select show-tick">
                                                                 <option value="pending" @selected($item->status == 'pending')> Pending </option>
-                                                                <option @selected($item->status == 'cancelled') value="cancelled">Cancelled</option>
-                                                                <option value="confirmed" @selected($item->status == 'confirmed')>Confirmed</option>
-                                                                <option value="shipped" @selected($item->status == 'shipped')>Shipped</option>
-                                                                <option value="delivered" @selected($item->status == 'delivered')>Delivered</option>
+                                                                <option @selected($item->status == 'inreview') value="inreview">In review</option>
+                                                                <option value="rejected" @selected($item->status == 'rejected')>Rejected</option>
+                                                                <option value="approved" @selected($item->status == 'approved')>Approved</option>
+                                                                
                                                             </select>
                                                         </div>
                                                         <div class="col-lg-4 col-md-4 status-update-button pl-0 mt-1">

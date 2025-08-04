@@ -3,25 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
+use App\Models\WebsiteOrder;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::latest()->get();
+        $orders = WebsiteOrder::latest()->get();
         return view('admin.layouts.pages.order.index', compact('orders'));
     }
 
     public function orderChangeStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => ['required', Rule::in(['pending', 'cancelled', 'confirmed', 'shipped', 'delivered'])],
+            'status' => ['required', Rule::in(['pending', 'inreview', 'rejected', 'approved'])],
         ]);
 
-        $order = Order::findOrFail($id);
+        $order = WebsiteOrder::findOrFail($id);
         $order->status = $request->status ?? 'pending';
         $order->status_updated_at = now();
         $order->save();
@@ -31,14 +32,14 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $order = Order::with('orderItems')->findOrFail($id);
+        $order = WebsiteOrder::with('orderItems')->findOrFail($id);
 
         return view('admin.layouts.pages.order.show', compact('order'));
     }
 
     public function destroy($id)
     {
-        $order = Order::find($id);
+        $order = WebsiteOrder::find($id);
 
         if ($order) {
             $order->orderItems()->delete();
@@ -77,7 +78,7 @@ class OrderController extends Controller
         $end_date = $request->end_date;
         $status = $request->status;
 
-        $query = Order::query();
+        $query = WebsiteOrder::query();
 
         if ($start_date) {
             $query->whereDate('created_at', '>=', $start_date);

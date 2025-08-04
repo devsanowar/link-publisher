@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('domain_authority')->default(0);
             $table->string('domain_rating')->default(0);
             $table->decimal('pricing', 10, 2)->default(0); // Better precision
-            $table->enum('status', ['pending', 'inreview', 'rejected', 'approved'])->default('pending');
+            $table->enum('status', ['pending', 'inreview', 'rejected', 'approved'])->default('pending'); 
             $table->tinyInteger('is_active')->default(0);
+            $table->tinyInteger('status_updated_at')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
