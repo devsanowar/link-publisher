@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
          $request->authenticate();
          $request->session()->regenerate();
 
-         if (is_null(Auth::user()->system_admin) || Auth::user()->system_admin !== 'Admin') {
+         if (is_null(Auth::user()->system_admin) || Auth::user()->system_admin !== 'admin') {
              Auth::logout();
              return redirect()->route('login')->with('error', 'You are not authorized to access the admin panel.');
          }

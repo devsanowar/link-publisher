@@ -8,7 +8,7 @@
             <nav class="nav flex-column">
                 <a class="nav-link active" href="{{ route('publisher.dashboard') }}"><i class="fas fa-tachometer-alt me-2"></i>
                     Dashboard</a>
-                <a class="nav-link" href="dashboard-my-website.html"><i class="fas fa-globe me-2"></i> My Websites</a>
+                <a class="nav-link" href="{{ route('website.index') }}"><i class="fas fa-globe me-2"></i> My Websites</a>
                 <a class="nav-link" href="dashboard-my-orders.html"><i class="fas fa-shopping-cart me-2"></i> My
                     Orders</a>
                 <a class="nav-link" href="dashboard-paylod.html"><i class="fas fa-wallet me-2"></i> Payouts</a>

@@ -14,22 +14,15 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\UpazilaController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\DistrictController;
-use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\BlocklistController;
 use App\Http\Controllers\Admin\AdminPanelController;
 use App\Http\Controllers\Admin\NewslatterController;
-use App\Http\Controllers\Admin\SmsSettingController;
 use App\Http\Controllers\Admin\SocialIconController;
 use App\Http\Controllers\Admin\VisitorLogController;
 use App\Http\Controllers\Admin\WhyChoseUsController;
 use App\Http\Controllers\Admin\AchievementController;
 use App\Http\Controllers\Admin\PromobannerController;
-use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\ReturnrefundController;
 use App\Http\Controllers\Admin\WebsiteColorController;
@@ -132,42 +125,6 @@ Route::prefix('admin')
 
         });
 
-        // Categories
-        Route::prefix('category')->group(function () {
-            Route::get('/', [CategoryController::class, 'index'])->name('category.index');
-            Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
-            Route::post('store', [CategoryController::class, 'store'])->name('category.store');
-            Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-            Route::put('{id}', [CategoryController::class, 'update'])->name('category.update');
-            Route::delete('{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
-            Route::post('/category/status-change', [CategoryController::class, 'categoryChangeStatus'])->name('category.status');
-        });
-
-        // Sub Category
-        Route::resource('subcategory', SubcategoryController::class);
-
-        // Product
-        Route::resource('product', ProductController::class);
-        Route::post('/product/status-change', [ProductController::class, 'productChangeStatus'])->name('product.status');
-        Route::get('/All-trashed/product', [ProductController::class, 'trashedData'])->name('product.trash');
-        Route::get('/restore/{id}/productData', [ProductController::class, 'restoreData'])->name('product.restore');
-        Route::delete('/permanant/{id}/productdata', [ProductController::class, 'forceDeleteData'])->name('product.forceDelete');
-        Route::get('changeStatus/{id}', [ProductController::class, 'changeStatus'])->name('changeStatus');
-
-        // District route
-        Route::get('district', [DistrictController::class, 'index'])->name('district.index');
-        Route::post('/district/store/', [DistrictController::class, 'store'])->name('district.store');
-        Route::get('district/edit/{id}', [DistrictController::class, 'edit'])->name('district.edit');
-        Route::post('district/update', [DistrictController::class, 'update'])->name('district.update');
-        Route::delete('district/destroy/{id}', [DistrictController::class, 'destroy'])->name('district.destroy');
-        Route::post('/district/status-change', [DistrictController::class, 'districtChangeStatus'])->name('district.status');
-
-        // Upazila Route Here
-        Route::get('upazila', [UpazilaController::class, 'index'])->name('upazila.index');
-        Route::post('/upazila/store/', [UpazilaController::class, 'storeUpazila'])->name('upazila.store');
-        Route::put('/upazilas/{id}', [UpazilaController::class, 'update'])->name('upazilas.update');
-        Route::delete('upazila/destroy/{id}', [UpazilaController::class, 'destroyUpazila'])->name('upazila.destroy');
-        Route::post('/upazila/status-change', [UpazilaController::class, 'upazilaChangeStatus'])->name('upazila.status');
 
         // Order routes Here
         Route::get('order', [OrderController::class, 'index'])->name('order.index');
@@ -177,12 +134,7 @@ Route::prefix('admin')
         Route::get('/admin/filter-order', [OrderController::class, 'orderFilter'])->name('filter.orders');
         Route::post('/order/change-status/{id}', [OrderController::class, 'orderChangeStatus'])->name('orderChangeStatus');
 
-        // shipping routes
-        Route::get('shipping', [ShippingController::class, 'index'])->name('shipping.index');
-        Route::post('shipping/store', [ShippingController::class, 'store'])->name('shipping.store');
-        Route::delete('shipping/{id}/destroy', [ShippingController::class, 'destroy'])->name('shipping.destroy');
-        Route::put('/shipping/{id}', [ShippingController::class, 'update'])->name('shipping.update');
-        Route::get('shipping-status/{id}', [ShippingController::class, 'shippingChangeStatus'])->name('shipping.status');
+        
 
         // payment method routes here
         Route::get('payment_method', [PaymentMethodController::class, 'index'])->name('payment_method.index');
@@ -225,18 +177,6 @@ Route::prefix('admin')
         Route::get('Newslatter', [NewslatterController::class, 'index'])->name('newslatter');
         Route::get('Newslatter/destroy/{id}', [NewslatterController::class, 'destroy'])->name('newslatter.destroy');
 
-        // SMS Settings
-        Route::get('sms-settings', [SmsSettingController::class, 'edit'])->name('sms-settings.edit');
-        Route::put('sms-settings', [SmsSettingController::class, 'update'])->name('sms-settings.update');
-
-
-        // SMS routes here
-        Route::group(['prefix' => 'moblieSMS'], function(){
-            Route::get('sms', [SmsSettingController::class, 'moblie_sms'])->name('mobile.sms');
-            Route::get('custom-sms', [SmsSettingController::class, 'custom_sms'])->name('custom.sms');
-            Route::get('sms-report', [SmsSettingController::class, 'sms_report'])->name('sms_report.sms');
-            Route::post('/send/custom/message', [SmsSettingController::class, 'sendCustomSms'])->name('send.custom_sms');
-        });
 
 
         // block list routes
@@ -259,8 +199,6 @@ Route::prefix('admin')
         // Website Color routes
         Route::get('website-color', [WebsiteColorController::class, 'edit'])->name('website_color.edit');
         Route::put('/website-color/update/{id}', [WebsiteColorController::class, 'update'])->name('website_color.update');
-
-        
 
 
     });

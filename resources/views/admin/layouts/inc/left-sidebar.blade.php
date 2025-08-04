@@ -65,49 +65,8 @@
                 </a>
             </li>
 
-            <li class="{{ $isProductActive ? 'active open' : '' }}">
-                <a href="javascript:void(0);" class="menu-toggle"> <i class="zmdi zmdi-shopping-cart"></i>
-                    <span>Product</span>
-                </a>
-                <ul class="ml-menu">
-                    <li class="{{ request()->routeIs('product.create') ? 'active' : '' }}">
-                        <a href="{{ route('product.create') }}">Add Product</a>
-                    </li>
-                    <li class="{{ request()->routeIs('product.index') ? 'active' : '' }}">
-                        <a href="{{ route('product.index') }}">All Product</a>
-                    </li>
-                    <li class="{{ request()->routeIs('category.*') ? 'active' : '' }}">
-                        <a href="{{ route('category.index') }}">Category</a>
-                    </li>
-                    {{-- <li class="{{ request()->routeIs('subcategory.*') ? 'active' : '' }}">
-                        <a href="{{ route('subcategory.index') }}">Sub Category</a>
-                    </li> --}}
-                    <li class="{{ request()->routeIs('brand.*') ? 'active' : '' }}">
-                        <a href="{{ route('brand.index') }}">Brand</a>
-                    </li>
-
-                </ul>
-            </li>
 
 
-            <li class="{{ $isShippingPageActive ? 'active' : '' }}">
-                <a href="{{ route('shipping.index') }}"><i class="zmdi zmdi-money-box"></i>
-                    <span>Shipping</span>
-                </a>
-            </li>
-
-
-
-
-            {{-- District Menu --}}
-            <li class="{{ $isDistrictPageActive ? 'active' : '' }}">
-                <a href="{{ route('district.index') }}"><i class="zmdi zmdi-map"></i><span>District</span></a>
-            </li>
-
-            {{-- District Menu --}}
-            <li class="{{ $isUpazilaPageActive ? 'active' : '' }}">
-                <a href="{{ route('upazila.index') }}"><i class="zmdi zmdi-map"></i><span>Upazila</span></a>
-            </li>
 
             <li class="{{ $isOrderPageActive ? 'active' : '' }}">
                 <a href="{{ route('order.index') }}"><i class="zmdi zmdi-shopping-cart"></i><span>Orders <span
@@ -148,16 +107,6 @@
                     <a href="{{ route('user.create') }}"><i class="zmdi zmdi-accounts"></i><span>Users</span></a>
                 </li>
             @endif
-
-            <li class="{{ Request::is('moblieSMS*') ? 'active' : '' }}"><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-email"></i><span>SMS</span> </a>
-                <ul class="ml-menu">
-                    <li class="{{ Request::is('moblieSMS/sms') ? 'active' : '' }}"><a href="{{ route('mobile.sms') }}">Send SMS</a></li>
-                    <li class="{{ Request::is('moblieSMS/custom-sms') ? 'active' : '' }}"><a href="{{ route('custom.sms') }}">Custome SMS</a></li>
-                    <li class="{{ Request::is('moblieSMS/sms-report') ? 'active' : '' }}"><a href="{{ route('sms_report.sms') }}">SMS Report</a></li>
-                </ul>
-            </li>
-
-            {{-- Shared: Inbox, Settings, Logout --}}
 
 
 
@@ -209,11 +158,6 @@
                     <span>Settings</span>
                 </a>
                 <ul class="ml-menu">
-                    <li class="{{ request()->routeIs('sms-settings.*') ? 'active' : '' }}">
-                        <a href="{{ route('sms-settings.edit') }}">
-                            <span>SMS API Settings</span>
-                        </a>
-                    </li>
                     <li class="{{ request()->routeIs('website_setting') ? 'active' : '' }}">
                         <a href="{{ route('website_setting') }}">Website Setting</a>
                     </li>
