@@ -145,7 +145,66 @@
             });
         }
     </script>
+
+    <script>
+        // Profile image upload
+        document.getElementById('uploadImg').addEventListener('change', function (e) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                document.getElementById('profilePic').src = reader.result;
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        });
+
+        const originalData = {};
+
+        function enableEdit(sectionId) {
+            const section = document.getElementById(sectionId);
+            const values = section.querySelectorAll('.info-value');
+            originalData[sectionId] = {};
+            values.forEach(val => {
+                const key = val.dataset.key;
+                const current = val.textContent;
+                originalData[sectionId][key] = current;
+                val.innerHTML = `<input type="text" name="${key}" value="${current}">`;
+            });
+            toggleButtons(sectionId, true);
+        }
+
+        function saveEdit(sectionId) {
+            const section = document.getElementById(sectionId);
+            const inputs = section.querySelectorAll('input');
+            inputs.forEach(input => {
+                const key = input.name;
+                const parent = input.parentElement;
+                parent.textContent = input.value;
+            });
+            toggleButtons(sectionId, false);
+        }
+
+        function cancelEdit(sectionId) {
+            const section = document.getElementById(sectionId);
+            const values = section.querySelectorAll('.info-value');
+            values.forEach(val => {
+                const key = val.dataset.key;
+                val.textContent = originalData[sectionId][key];
+            });
+            toggleButtons(sectionId, false);
+        }
+
+        function toggleButtons(sectionId, editing) {
+            const section = document.getElementById(sectionId);
+            section.querySelector('.btn-edit').style.display = editing ? 'none' : 'inline-block';
+            section.querySelector('.btn-save').style.display = editing ? 'inline-block' : 'none';
+            section.querySelector('.btn-cancel').style.display = editing ? 'inline-block' : 'none';
+        }
+    </script>
+
+
+
 <script>
+
+
     document.getElementById('uploadImg').addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (!file) return;
