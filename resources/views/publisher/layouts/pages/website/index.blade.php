@@ -1,7 +1,7 @@
 @extends('publisher.layouts.app')
 @section('title', 'Website')
 @section('publisher_contents')
-    <div class="container mt-4">
+    <div class="mt-4">
         <!-- Breadcrumb -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">

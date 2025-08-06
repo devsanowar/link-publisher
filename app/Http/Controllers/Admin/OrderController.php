@@ -32,26 +32,18 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $order = WebsiteOrder::with('orderItems')->findOrFail($id);
+        $websiteOrder = WebsiteOrder::findOrFail($id);
 
-        return view('admin.layouts.pages.order.show', compact('order'));
+        return view('admin.layouts.pages.order.show', compact('websiteOrder'));
     }
 
     public function destroy($id)
     {
         $order = WebsiteOrder::find($id);
+        $order->delete();
 
-        if ($order) {
-            $order->orderItems()->delete();
-
-            $order->delete();
-
-            $toast = Toastr();
-            $toast->success('Order and associated items deleted successfully!', 'Success');
-        } else {
-            $toast = Toastr();
-            $toast->error('Order not found!', 'Error');
-        }
+        $toast = Toastr();
+        $toast->success('Order and associated items deleted successfully!', 'Success');
 
         return redirect()->back();
     }
@@ -105,4 +97,40 @@ class OrderController extends Controller
 
         return view('admin.layouts.pages.order.index', compact('orders'));
     }
+
+
+    public function trashedData()
+    {
+        $websiteOrders = WebsiteOrder::onlyTrashed()->get();
+
+        return view('admin.layouts.pages.order.recyclebin', compact('websiteOrders'));
+    }
+
+
+      // Restore product data
+    public function restoreData($id)
+    {
+        WebsiteOrder::withTrashed()->where('id', $id)->restore();
+        $toast = Toastr();
+        $toast->success('Website Order restored successfully.');
+        return redirect()->route('order.index');
+    }
+
+    public function forceDeleteData($id)
+    {
+        $websiteOrder = WebsiteOrder::withTrashed()->where('id', $id)->first();
+
+        if (!$websiteOrder) {
+            return redirect()->route('order.index')->with('error', 'Order not found.');
+        }
+
+        $websiteOrder->forceDelete();
+
+        $toast = Toastr();
+        $toast->success('Order permanently deleted successfully.');
+        return redirect()->back();
+    }
+
+
+
 }

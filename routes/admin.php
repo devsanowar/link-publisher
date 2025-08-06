@@ -128,12 +128,14 @@ Route::prefix('admin')
 
         // Order routes Here
         Route::get('order', [OrderController::class, 'index'])->name('order.index');
-        // Route::post('order-status/{id}', [OrderController::class, 'orderChangeStatus'])->name('orderChangeStatus');
         Route::get('orders-show/{id}', [OrderController::class, 'show'])->name('orders.show');
         Route::delete('orders-destroy/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
         Route::get('/admin/filter-order', [OrderController::class, 'orderFilter'])->name('filter.orders');
         Route::post('/order/change-status/{id}', [OrderController::class, 'orderChangeStatus'])->name('orderChangeStatus');
 
+        Route::get('trashed-order', [OrderController::class, 'trashedData'])->name('trashed_order.index');
+        Route::get('restore-order/{id}', [OrderController::class, 'restoreData'])->name('order.restore');
+        Route::delete('order/force-delete/{id}', [OrderController::class, 'forceDeleteData'])->name('order.forceDelete');
         
 
         // payment method routes here

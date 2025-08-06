@@ -44,65 +44,46 @@
                 <div class="card-body" id="invoice">
                     <div class="container border p-4">
                         <h2 class="text-center mb-4"><img style="width:20%" src="{{ asset($setting->website_logo) }}" alt="Logo" /></h2>
-                        <h5 class="text-center text-muted mb-4">Invoice</h5>
+                        {{-- <h5 class="text-center text-muted mb-4">Invoice</h5> --}}
 
-                        <div class="row mt-4">
+                        {{-- <div class="row mt-4">
                             <div class="col-md-6">
                                 <h5>Customer Information</h5>
-                                <p><strong>Name:</strong> {{ $order->first_name }} {{ $order->last_name }}</p>
-                                <p><strong>Phone:</strong> {{ $order->phone }}</p>
-                                <p><strong>Address:</strong> {{ $order->address }}</p>
+                                <p><strong>Name:</strong> {{ $websiteOrder->first_name }} {{ $websiteOrder->last_name }}</p>
+                                <p><strong>Phone:</strong> {{ $websiteOrder->phone }}</p>
+                                <p><strong>Address:</strong> {{ $websiteOrder->address }}</p>
                             </div>
                             <div class="col-md-6 text-right">
                                 <h5>Invoice Information</h5>
-                                <p><strong>Invoice Number: </strong>#{{ $order->order_id }}</p>
-                                <p><strong>Date:</strong> {{ $order->created_at->format('F j, Y') }}</p>
-                                <p><strong>Payment Method:</strong> {{ $order->payment_method }}</p>
+                                <p><strong>Invoice Number: </strong>#{{ $websiteOrder->order_id }}</p>
+                                <p><strong>Date:</strong> {{ $websiteOrder->created_at->format('F j, Y') }}</p>
+                                <p><strong>Payment Method:</strong> {{ $websiteOrder->payment_method }}</p>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <table class="table table-bordered mt-4">
                             <thead class="table-light">
                                 <tr>
-                                    <th>#</th>
-                                    <th>Product Name</th>
-                                    <th>Unit Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th>Website URL</th>
+                                    <th>Category</th>
+                                    <th>Language</th>
+                                    <th>Monthly Traffic</th>
+                                    <th>Domain Authority</th>
+                                    <th>Domain ratting</th>
+                                    <th>status</th>
                                 </tr>
                             </thead>
 
-                            @php
-                                $subtotal = 0;
-                            @endphp
-
                             <tbody>
-                                @foreach ($order->orderItems as $key => $orderItem)
-                                 @php
-                                    $total = $orderItem->price * $orderItem->quantity;
-                                    $subtotal += $total;
-                                @endphp
-
+                                
                                 <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $orderItem->product->product_name }}</td>
-                                    <td>{{ $orderItem->price }}</td>
-                                    <td>{{ $orderItem->quantity }}</td>
-                                    <td>{{ $orderItem->quantity * $orderItem->price }}</td>
-                                </tr>
-                                @endforeach
-                                <tr class="custom-tr-class">
-                                    <th colspan="4" style="text-align:right">Sub Total:</th>
-                                    <th>{{ number_format($subtotal, 2)}} TK</th>
-                                </tr>
-
-                                <tr class="custom-tr-class">
-                                    <th colspan="4" style="text-align:right">Shipping Cost:</th>
-                                    <th>{{ number_format($order->shipping_charge, 2) }} TK</th>
-                                </tr>
-                                <tr class="custom-tr-class">
-                                    <th colspan="4" style="text-align:right">Grand Total:</th>
-                                    <th class="text-success">{{ number_format($order->total_price, 2) }} TK</th>
+                                    <td>{{ $websiteOrder->website_url }}</td>
+                                    <td>{{ $websiteOrder->website_category }}</td>
+                                    <td>{{ $websiteOrder->website_language }}</td>
+                                    <td>{{ $websiteOrder->monthly_traffic }}</td>
+                                    <td>{{ $websiteOrder->domain_authority }}</td>
+                                    <td>{{ $websiteOrder->domain_rating }}</td>
+                                    <td>{{ $websiteOrder->status }}</td>
                                 </tr>
 
                             </tbody>
@@ -116,7 +97,7 @@
                             </div>
                         </div> --}}
 
-                        <p class="text-center mt-4">Thank you for your purchase!</p>
+                        <p class="text-center mt-4">Thank you for your order!</p>
                     </div>
                 </div>
             </div>
