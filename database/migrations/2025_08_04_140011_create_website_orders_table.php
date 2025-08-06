@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('pricing', 10, 2)->default(0); // Better precision
             $table->enum('status', ['pending', 'inreview', 'rejected', 'approved'])->default('pending'); 
             $table->tinyInteger('is_active')->default(0);
-            $table->tinyInteger('status_updated_at')->default(0);
+            $table->timestamp('status_updated_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
