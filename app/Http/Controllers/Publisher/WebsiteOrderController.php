@@ -9,7 +9,8 @@ use App\Http\Controllers\Controller;
 class WebsiteOrderController extends Controller
 {
     public function index(){
-        return view('publisher.layouts.pages.website.index');
+        $websiteOrders = WebsiteOrder::all();
+        return view('publisher.layouts.pages.website.index', compact('websiteOrders'));
     }
 
     public function create(){

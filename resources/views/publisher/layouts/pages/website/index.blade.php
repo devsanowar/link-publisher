@@ -60,17 +60,45 @@
 
                 </div>
 
+                @php
+                    $allOrderCount = 0;
+                    $approvedCount = 0;
+                    $pendingCount = 0;
+                    $inReviewCount = 0;
+                    $rejectedCount = 0;
+
+                    foreach ($websiteOrders as $order) {
+                        $allOrderCount++;
+                        if ($order->status === 'approved') {
+                            $approvedCount++;
+                        }
+
+                        if ($order->status === 'pending') {
+                            $pendingCount++;
+                        }
+
+                        if ($order->status === 'inreview') {
+                            $inReviewCount++;
+                        }
+
+                        if($order->status === 'rejected'){
+                            $rejectedCount++;
+                        }
+                    }
+                @endphp
+
+
                 <!-- Tabs -->
                 <ul class="nav nav-tabs custom-tabs mb-3" role="tablist">
-                    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#approved">Approved (2)</a>
+                    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#approved">Approved ({{ $approvedCount }})</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pending">Pending
-                            (1)</a></li>
+                            ({{ $pendingCount }})</a></li>
                     <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#review">In Review
-                            (1)</a></li>
+                            ({{ $inReviewCount }})</a></li>
                     <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#rejected">Rejected
-                            (1)</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#all">All (5)</a></li>
+                            ({{ $rejectedCount }})</a></li>
+                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#all">All ({{ $allOrderCount }})</a></li>
                 </ul>
 
                 <!-- Tab Content -->
@@ -81,43 +109,38 @@
                             <table class="table table-bordered text-center align-middle">
                                 <thead>
                                     <tr>
+                                        <th>S/N</th>
                                         <th>Website URL</th>
-                                        <th>DA</th>
-                                        <th>Ahrefs Traffic</th>
-                                        <th>Semrush Traffic</th>
-                                        <th>Google Analytics</th>
+                                        <th>Category</th>
+                                        <th>Language</th>
+                                        <th>Monthly Traffic</th>
+                                        <th>Domain Authority</th>
+                                        <th>Domain Rating</th>
                                         <th>Price</th>
                                         <th>Status</th>
-                                        <th>Live Link Validity</th>
                                         <th>Action</th>
                                         <th>Verify</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>www.approved1.com</td>
-                                        <td>45</td>
-                                        <td>1200</td>
-                                        <td>1500</td>
-                                        <td><i class="fas fa-check-circle text-success"></i></td>
-                                        <td>$25</td>
-                                        <td><span class="badge bg-success">Active</span></td>
-                                        <td>30 days</td>
-                                        <td><button class="btn btn-sm btn-primary">Edit</button></td>
-                                        <td><button class="btn btn-sm btn-warning">Verify</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>www.approved2.net</td>
-                                        <td>38</td>
-                                        <td>800</td>
-                                        <td>950</td>
-                                        <td><i class="fas fa-check-circle text-success"></i></td>
-                                        <td>$18</td>
-                                        <td><span class="badge bg-success">Active</span></td>
-                                        <td>60 days</td>
-                                        <td><button class="btn btn-sm btn-primary">Edit</button></td>
-                                        <td><button class="btn btn-sm btn-warning">Verify</button></td>
-                                    </tr>
+                                    @foreach ($websiteOrders as $key => $websiteOrder)
+                                    
+                                        @if( $websiteOrder->status === 'approved')
+                                            <tr>
+                                                <td>{{ $key+1 }}</td>
+                                                <td>{{ $websiteOrder->website_url }}</td>
+                                                <td>{{ $websiteOrder->website_category }}</td>
+                                                <td>{{ $websiteOrder->website_language }}</td>
+                                                <td>{{ $websiteOrder->monthly_traffic }}</td>
+                                                <td>{{ $websiteOrder->domain_authority }}</td>
+                                                <td>{{ $websiteOrder->domain_rating }}</td>
+                                                <td><span class="badge bg-success">{{ $websiteOrder->status }}</span></td>
+                                                <td>30 days</td>
+                                                <td><button class="btn btn-sm btn-primary">Edit</button></td>
+                                                <td><button class="btn btn-sm btn-warning">Verify</button></td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -129,32 +152,38 @@
                             <table class="table table-bordered text-center align-middle">
                                 <thead>
                                     <tr>
+                                        <th>S/N</th>
                                         <th>Website URL</th>
-                                        <th>DA</th>
-                                        <th>Ahrefs Traffic</th>
-                                        <th>Semrush Traffic</th>
-                                        <th>Google Analytics</th>
+                                        <th>Category</th>
+                                        <th>Language</th>
+                                        <th>Monthly Traffic</th>
+                                        <th>Domain Authority</th>
+                                        <th>Domain Rating</th>
                                         <th>Price</th>
                                         <th>Status</th>
-                                        <th>Live Link Validity</th>
                                         <th>Action</th>
                                         <th>Verify</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>www.pending.com</td>
-                                        <td>33</td>
-                                        <td>550</td>
-                                        <td>620</td>
-                                        <td><i class="fas fa-minus-circle text-warning"></i></td>
-                                        <td>$20</td>
-                                        <td><span class="badge bg-warning text-dark">Pending</span></td>
-                                        <td>N/A</td>
-                                        <td><button class="btn btn-sm btn-secondary">Edit</button></td>
-                                        <td><button class="btn btn-sm btn-outline-secondary">Verify</button>
-                                        </td>
-                                    </tr>
+                                    @foreach ($websiteOrders as $key => $websiteOrder)
+                                    
+                                        @if( $websiteOrder->status === 'pending')
+                                            <tr>
+                                                <td>{{ $key+1 }}</td>
+                                                <td>{{ $websiteOrder->website_url }}</td>
+                                                <td>{{ $websiteOrder->website_category }}</td>
+                                                <td>{{ $websiteOrder->website_language }}</td>
+                                                <td>{{ $websiteOrder->monthly_traffic }}</td>
+                                                <td>{{ $websiteOrder->domain_authority }}</td>
+                                                <td>{{ $websiteOrder->domain_rating }}</td>
+                                                <td><span class="badge bg-success">{{ $websiteOrder->status }}</span></td>
+                                                <td>30 days</td>
+                                                <td><button class="btn btn-sm btn-primary">Edit</button></td>
+                                                <td><button class="btn btn-sm btn-warning">Verify</button></td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -166,32 +195,38 @@
                             <table class="table table-bordered text-center align-middle">
                                 <thead>
                                     <tr>
+                                        <th>S/N</th>
                                         <th>Website URL</th>
-                                        <th>DA</th>
-                                        <th>Ahrefs Traffic</th>
-                                        <th>Semrush Traffic</th>
-                                        <th>Google Analytics</th>
+                                        <th>Category</th>
+                                        <th>Language</th>
+                                        <th>Monthly Traffic</th>
+                                        <th>Domain Authority</th>
+                                        <th>Domain Rating</th>
                                         <th>Price</th>
                                         <th>Status</th>
-                                        <th>Live Link Validity</th>
                                         <th>Action</th>
                                         <th>Verify</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>www.reviewsite.com</td>
-                                        <td>41</td>
-                                        <td>770</td>
-                                        <td>820</td>
-                                        <td><i class="fas fa-clock text-info"></i></td>
-                                        <td>$23</td>
-                                        <td><span class="badge bg-info text-dark">In Review</span></td>
-                                        <td>N/A</td>
-                                        <td><button class="btn btn-sm btn-secondary">Edit</button></td>
-                                        <td><button class="btn btn-sm btn-outline-secondary">Verify</button>
-                                        </td>
-                                    </tr>
+                                    @foreach ($websiteOrders as $key => $websiteOrder)
+                                    
+                                        @if( $websiteOrder->status === 'inreview')
+                                            <tr>
+                                                <td>{{ $key+1 }}</td>
+                                                <td>{{ $websiteOrder->website_url }}</td>
+                                                <td>{{ $websiteOrder->website_category }}</td>
+                                                <td>{{ $websiteOrder->website_language }}</td>
+                                                <td>{{ $websiteOrder->monthly_traffic }}</td>
+                                                <td>{{ $websiteOrder->domain_authority }}</td>
+                                                <td>{{ $websiteOrder->domain_rating }}</td>
+                                                <td><span class="badge bg-success">{{ $websiteOrder->status }}</span></td>
+                                                <td>30 days</td>
+                                                <td><button class="btn btn-sm btn-primary">Edit</button></td>
+                                                <td><button class="btn btn-sm btn-warning">Verify</button></td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -203,32 +238,38 @@
                             <table class="table table-bordered text-center align-middle">
                                 <thead>
                                     <tr>
+                                        <th>S/N</th>
                                         <th>Website URL</th>
-                                        <th>DA</th>
-                                        <th>Ahrefs Traffic</th>
-                                        <th>Semrush Traffic</th>
-                                        <th>Google Analytics</th>
+                                        <th>Category</th>
+                                        <th>Language</th>
+                                        <th>Monthly Traffic</th>
+                                        <th>Domain Authority</th>
+                                        <th>Domain Rating</th>
                                         <th>Price</th>
                                         <th>Status</th>
-                                        <th>Live Link Validity</th>
                                         <th>Action</th>
                                         <th>Verify</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>www.rejectedsite.com</td>
-                                        <td>20</td>
-                                        <td>150</td>
-                                        <td>200</td>
-                                        <td><i class="fas fa-times text-danger"></i></td>
-                                        <td>$10</td>
-                                        <td><span class="badge bg-danger">Rejected</span></td>
-                                        <td>N/A</td>
-                                        <td><button class="btn btn-sm btn-secondary">Edit</button></td>
-                                        <td><button class="btn btn-sm btn-outline-secondary">Verify</button>
-                                        </td>
-                                    </tr>
+                                    @foreach ($websiteOrders as $key => $websiteOrder)
+                                    
+                                        @if( $websiteOrder->status === 'rejected')
+                                            <tr>
+                                                <td>{{ $key+1 }}</td>
+                                                <td>{{ $websiteOrder->website_url }}</td>
+                                                <td>{{ $websiteOrder->website_category }}</td>
+                                                <td>{{ $websiteOrder->website_language }}</td>
+                                                <td>{{ $websiteOrder->monthly_traffic }}</td>
+                                                <td>{{ $websiteOrder->domain_authority }}</td>
+                                                <td>{{ $websiteOrder->domain_rating }}</td>
+                                                <td><span class="badge bg-success">{{ $websiteOrder->status }}</span></td>
+                                                <td>30 days</td>
+                                                <td><button class="btn btn-sm btn-primary">Edit</button></td>
+                                                <td><button class="btn btn-sm btn-warning">Verify</button></td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -237,7 +278,44 @@
                     <!-- All -->
                     <div class="tab-pane fade" id="all">
                         <p class="text-muted">All websites will be shown here.</p>
-                        <!-- You can copy all 5 rows above and show them in this table if needed -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered text-center align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Website URL</th>
+                                        <th>Category</th>
+                                        <th>Language</th>
+                                        <th>Monthly Traffic</th>
+                                        <th>Domain Authority</th>
+                                        <th>Domain Rating</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                        <th>Verify</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($websiteOrders as $key => $websiteOrder)
+
+                                        <tr>
+                                            <td>{{ $key+1 }}</td>
+                                            <td>{{ $websiteOrder->website_url }}</td>
+                                            <td>{{ $websiteOrder->website_category }}</td>
+                                            <td>{{ $websiteOrder->website_language }}</td>
+                                            <td>{{ $websiteOrder->monthly_traffic }}</td>
+                                            <td>{{ $websiteOrder->domain_authority }}</td>
+                                            <td>{{ $websiteOrder->domain_rating }}</td>
+                                            <td><span class="badge bg-success">{{ $websiteOrder->status }}</span></td>
+                                            <td>30 days</td>
+                                            <td><button class="btn btn-sm btn-primary">Edit</button></td>
+                                            <td><button class="btn btn-sm btn-warning">Verify</button></td>
+                                        </tr>
+                                       
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
