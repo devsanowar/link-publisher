@@ -2,7 +2,7 @@
         <nav class="navbar shadow fixed" id="mainNavbar">
             <div class="container">
                 <div class="navbar-brand">
-                    <a href="index.html"><img src="assets/images/logo.png" alt="Logo" /></a>
+                    <a href="index.html"><img src="{{ asset('frontend') }}/assets/images/logo.png" alt="Logo" /></a>
                 </div>
                 <div class="nav-links">
                     <div class="nav-item nav-item-service">

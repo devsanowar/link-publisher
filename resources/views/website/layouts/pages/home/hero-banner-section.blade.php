@@ -1,0 +1,1 @@
+<section class="hero-banner-image-section"> </section>
