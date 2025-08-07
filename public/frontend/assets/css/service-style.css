@@ -1,0 +1,622 @@
+/* ===============================
+   Root Variables and Base Styles
+   =============================== */
+@import url("https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap");
+
+:root {
+  --primary: #1c2359;
+  --secondary: #f96363;
+  --web-primary: #f2652d;
+  --web-hover-primary: #d5440b;
+  --web-secondary: #275570;
+  --background: #ffffff;
+  --font-family: "Radio Canada Big", sans-serif;
+  --text: #212529;
+  --text-para: #7b7b7b;
+  --heading: #0056b3;
+  --muted: #adb5bd;
+  --transition: 0.3s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background-color: var(--white-color);
+}
+p {
+  margin-bottom: 0px;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style: none;
+}
+.service-section-title {
+  max-width: 80%;
+  margin: 0px auto;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.service-section-title .service-heading {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.service-section-title .service-subtitle {
+  font-size: 16px;
+  line-height: 26px;
+  color: #fff;
+  letter-spacing: 0.32px;
+}
+/* ------------------Servide To Header Area------------------ */
+.link-building-header-section {
+  padding: 120px 0;
+  background-color: #f9f9f9;
+}
+
+.link-building-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  gap: 2rem;
+}
+
+.link-content {
+  flex: 1;
+  min-width: 280px;
+}
+
+.link-content h1 {
+  color: var(--web-secondary);
+  font-size: 42px;
+  line-height: 48px;
+  font-weight: 600;
+  margin: 0px;
+}
+
+.link-content .subheading {
+  color: var(--web-secondary);
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-top: 15px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.benefits-list li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+.check-icon {
+  background-color: var(--web-secondary);
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 13px;
+  margin-right: 10px;
+}
+.button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.service-header-section-btn .btn {
+  font-size: 16px;
+  padding: 10px 30px;
+  min-width: 230px;
+  text-align: center;
+}
+.service-header-section-btn .btn-link-publisher-primary:hover {
+  color: var(--web-primary);
+  border: 1px solid var(--web-primary);
+}
+
+.video-container {
+  flex: 1;
+  min-width: 280px;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .link-building-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .button-group {
+    justify-content: center;
+  }
+}
+
+/* ----------Pricing Section Start-------------- */
+.pricing-section {
+  background-color: #132936;
+  padding: 50px 0;
+  color: var(--background);
+}
+
+.pricing-card {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  max-height: 550px;
+  transition: 0.4s;
+}
+.pricing-card:hover {
+  background-color: var(--web-primary);
+  color: #fff;
+}
+.pricing-card:hover .card-title,
+.pricing-card:hover .card-price {
+  color: #fff;
+}
+.pricing-card:hover .btn-outline-primary {
+  background-color: #fff;
+  color: var(--web-primary);
+}
+
+.pricing-card .card-title {
+  text-transform: capitalize;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: 0.4px;
+  padding-bottom: 8px;
+  display: block;
+  color: var(--web-secondary);
+}
+
+.pricing-card .card-price {
+  margin-bottom: 0;
+  font-weight: 600;
+  letter-spacing: 0.96px;
+  font-size: 42px;
+  line-height: 50px;
+  color: var(--web-secondary);
+}
+
+.pricing-card .btn-outline-primary {
+  color: var(--web-primary);
+  border-color: var(--web-primary);
+  transition: var(--transition);
+}
+
+.pricing-card .btn-outline-primary:hover {
+  background-color: #fff;
+  color: var(--web-primary);
+}
+
+.pricing-card .btn-light {
+  color: var(--web-primary);
+  background-color: white;
+  font-weight: 600;
+}
+
+.pricing-card.recommended {
+  background-color: var(--web-primary);
+  color: white;
+}
+.recommended-badge {
+  background: #fff;
+  padding: 20px;
+  color: var(--web-primary);
+  box-shadow: 16px 24px 64px #f2652d3d;
+  border: 1px solid var(--web-primary);
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.pricing-card.recommended .card-price {
+  color: #fff;
+}
+
+.pricing-card.recommended .card-title {
+  color: white;
+}
+
+.plan-features {
+  min-height: 300px;
+  max-height: 300px;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 0 5px;
+  margin-bottom: 25px;
+}
+.plan-features ul li {
+  padding: 0 0 15px 15px;
+}
+.plan-features ul li .fa-circle-check {
+  margin-right: 10px;
+}
+
+/* Custom Scrollbar for features */
+.plan-features::-webkit-scrollbar {
+  width: 6px;
+}
+
+.plan-features::-webkit-scrollbar-thumb {
+  background-color: var(--web-primary);
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .pricing-card {
+    max-height: none;
+  }
+}
+/* ----------Pricing Section End-------------- */
+/* ----------Sercvice Why Choose Section Start-------------- */
+.service-why-choose-us {
+  padding: 40px 0;
+  overflow: hidden;
+}
+.service-why-choose-us .service-section-title .service-heading {
+  color: var(--web-secondary);
+}
+.service-why-choose-us .service-section-title .service-subtitle {
+  color: var(--text-para);
+}
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 1.5rem;
+}
+
+.feature-icon {
+  font-size: 1.2rem;
+  color: #f25f3a;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.feature-title {
+  font-weight: 700;
+  color: var(--web-primary);
+  margin-bottom: 5px;
+}
+
+.feature-text {
+  color: var(--web-secondary);
+  line-height: 26px;
+  font-weight: 500;
+}
+
+.footer-note {
+  font-size: 0.9rem;
+  color: var(--text-para);
+}
+/* ----------Sercvice Why Choose Section End-------------- */
+/* ----------Highlight Marketing section Start  -------------- */
+.highlight-marketing-section {
+  padding: 40px 0;
+  overflow: hidden;
+}
+.highlight-section-heading {
+  font-weight: 500;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  margin-bottom: 25px;
+  color: var(--web-secondary);
+}
+.highlight-section-para {
+  font-size: 16px;
+  color: var(--web-secondary);
+  margin: 15px 0;
+}
+.highlight-list {
+  color: var(--web-secondary);
+  position: relative;
+  margin-left: 30px;
+}
+.highlight-list:before {
+  content: "";
+  position: absolute;
+  background-image: url("/assets/images/service/provide-img.svg");
+  background-repeat: no-repeat;
+  left: -30px;
+  top: 0;
+  height: 25px;
+  width: 25px;
+  background-size: 100%, 100%;
+}
+.common-para-mute-text {
+  color: var(--text-para);
+}
+
+/* ----------Highlight Marketing section End  -------------- */
+/* ----------Link Building Process section Start  -------------- */
+.link-process-section {
+  background-color: #132936;
+  padding: 40px 0;
+}
+
+.subtitle {
+  color: #d1d5db;
+  font-size: 1rem;
+}
+.process-step {
+  border-left: 1px solid #fff;
+  padding-left: 30px;
+}
+.process-step:first-child {
+  border-left: 1px solid transparent;
+  padding-left: 0px;
+}
+.process-step .step-number {
+  width: 48px;
+  height: 48px;
+  background-color: #ff6933;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin: 0 auto;
+  margin-bottom: 30px !important;
+}
+.process-step h5 {
+  margin-bottom: 20px;
+  color: #c0dae9;
+}
+.step-description {
+  color: #fff;
+}
+@media (min-width: 768px) {
+  .process-step .step-number {
+    margin: 0;
+  }
+}
+
+/* ----------Link Building Process section End  -------------- */
+/* ----------cta-section Section Start  -------------- */
+.cta-box {
+  background-image: url("/assets/images/service/link-building-lap.webp"); /* Replace with actual image URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #0b253a; /* Fallback color */
+  border-radius: 16px;
+}
+
+.cta-section h3 {
+  font-size: 1.75rem;
+}
+
+.btn-warning {
+  background-color: #f26522;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #d8551d;
+}
+.text-build-features {
+  color: var(--text-para);
+}
+/* ----------cta-section Section End  -------------- */
+/* ----------Stand Out Section Start  -------------- */
+.stand-out-section {
+  padding: 40px 0;
+  overflow: hidden;
+}
+.stand-out-section-left-side h3 {
+  color: var(--web-secondary);
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+.stand-out-section-left-side p {
+  color: #275570cc;
+  font-weight: 600;
+  text-align: justify;
+  width: 80%;
+}
+.single-stand-out-box p {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: var(--web-primary);
+  background-color: #f6f6f6;
+  padding: 30px 40px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.stand-out-section-right-side {
+  padding: 20px;
+}
+.single-stand-out-box p::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  background: url("/assets/images/service/circle-right.png") no-repeat;
+  width: 24px;
+  height: 24px;
+  background-size: cover;
+}
+/* ----------Stand Out Section End  -------------- */
+/* ----------Why Hire Section Start  -------------- */
+.why-hire-section {
+  padding: 40px 0;
+  overflow: hidden;
+}
+.why-hire-section .service-section-title {
+  text-align: left;
+  max-width: 100%;
+}
+.why-hire-section .service-section-title .service-heading {
+  color: var(--web-secondary);
+}
+.why-hire-section .service-section-title p {
+  color: var(--web-secondary);
+}
+.single-hire-item p {
+  color: var(--web-secondary);
+}
+.click-icon-image img {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .chart-overlay {
+    position: static;
+    transform: none;
+    margin-top: 1rem;
+  }
+}
+/* ----------Why Hire Section End  -------------- */
+/* ----------Faq Section Start  -------------- */
+.faq-section {
+  padding: 40px 0;
+  overflow: hidden;
+}
+.faq-title-heading {
+  color: var(--web-secondary);
+}
+.faq-section .accordion-button {
+  font-weight: 600;
+  font-size: 1.1rem;
+  background-color: #fff;
+  color: #003f5c;
+  box-shadow: none;
+  padding-right: 2.5rem;
+  transition: background 0.3s;
+}
+.accordion-body {
+  color: var(--text-para);
+}
+.faq-section .accordion-button:not(.collapsed) {
+  background-color: #f9f9f9;
+}
+
+.faq-section .icon-toggle {
+  font-size: 1.5rem;
+  color: #f26522;
+  transition: transform 0.3s ease;
+}
+
+/* Remove default icon */
+.accordion-button::after {
+  display: none;
+}
+
+/* ----------Faq Section End  -------------- */
+/* ----------ready-posting Section Start  -------------- */
+.ready-posting {
+  padding: 40px 0;
+  overflow: hidden;
+}
+.posting-body {
+  padding: 60px 40px;
+  background: #f2652d;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.posting-body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 13px;
+  background-image: url("/assets/images/service/guest-level-left.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 300px;
+  height: 150px;
+  z-index: -1; /* Place background below the content */
+}
+.posting-body::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 300px;
+  background-image: url("/assets/images/service/guest-level-right.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 300px;
+  height: 140px;
+  z-index: -1;
+}
+
+.btn-get-started {
+  background-color: #fff;
+  padding: 10px 50px;
+  color: var(--web-primary);
+  margin-top: 20px;
+
+  &:hover {
+    background-color: #f3ebeb;
+    color: var(--web-hover-primary);
+  }
+}
+
+@media (max-width: 768px) {
+  .posting-body::before {
+    width: 300px;
+    height: 150px;
+  }
+  .posting-body::after {
+    width: 200px;
+    height: 100px;
+  }
+}
+
+/* ----------ready-posting Section End  -------------- */
