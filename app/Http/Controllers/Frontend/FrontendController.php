@@ -12,6 +12,7 @@ use App\Models\Promobanner;
 use App\Models\WebsiteSetting;
 use App\Models\WebsiteSocialIcon;
 use App\Http\Controllers\Controller;
+use App\Models\BannerHero;
 use App\Models\Privacypolicy;
 use App\Models\Returnrefund;
 use App\Models\Termscondition;
@@ -20,7 +21,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-
+        $banner = BannerHero::first();
         $promobanners = Promobanner::where('is_active', 1)
             ->latest()
             ->get(['id', 'image', 'url']);
@@ -42,7 +43,7 @@ class FrontendController extends Controller
 
         $blogs = Post::latest()->take(3)->get();
 
-        return view('website.home', compact(['achievements', 'reviews', 'about', 'blogs', 'promobanners', 'social_icon', 'cta']));
+        return view('website.home', compact(['banner','achievements', 'reviews', 'about', 'blogs', 'promobanners', 'social_icon', 'cta']));
     }
 
 
