@@ -3,22 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Cta;
-use App\Models\Faq;
 use App\Models\Post;
 use App\Models\About;
-use App\Models\Brand;
 use App\Models\Banner;
 use App\Models\Review;
-use App\Models\Slider;
-use App\Models\Product;
-use App\Models\Project;
-use App\Models\Service;
-use App\Models\Category;
-use App\Models\WhyChoseUs;
 use App\Models\Achievement;
 use App\Models\Promobanner;
-use App\Models\ProjectVideo;
-use Illuminate\Http\Request;
 use App\Models\WebsiteSetting;
 use App\Models\WebsiteSocialIcon;
 use App\Http\Controllers\Controller;
@@ -30,8 +20,6 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $banner = Banner::select(['id', 'title', 'sub_title', 'description', 'button_name', 'button_url', 'image'])->first();
-        
 
         $promobanners = Promobanner::where('is_active', 1)
             ->latest()
@@ -39,7 +27,7 @@ class FrontendController extends Controller
 
         $about = About::first();
         $social_icon = WebsiteSocialIcon::select(['id', 'messanger_url'])->first();
-        $website_setting = WebsiteSetting::select(['id', 'phone'])->first();
+        // $website_setting = WebsiteSetting::select(['id', 'phone'])->first();
 
 
 
@@ -54,10 +42,10 @@ class FrontendController extends Controller
 
         $blogs = Post::latest()->take(3)->get();
 
-        return view('website.home', compact(['banner', 'achievements', 'reviews', 'about', 'blogs', 'promobanners', 'social_icon', 'website_setting', 'cta']));
+        return view('website.home', compact(['achievements', 'reviews', 'about', 'blogs', 'promobanners', 'social_icon', 'cta']));
     }
 
-    
+
     public function termsAndCondtion()
     {
         $pageTitle = 'Term & Condition';

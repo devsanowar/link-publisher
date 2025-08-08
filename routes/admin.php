@@ -136,7 +136,7 @@ Route::prefix('admin')
         Route::get('trashed-order', [OrderController::class, 'trashedData'])->name('trashed_order.index');
         Route::get('restore-order/{id}', [OrderController::class, 'restoreData'])->name('order.restore');
         Route::delete('order/force-delete/{id}', [OrderController::class, 'forceDeleteData'])->name('order.forceDelete');
-        
+
 
         // payment method routes here
         Route::get('payment_method', [PaymentMethodController::class, 'index'])->name('payment_method.index');

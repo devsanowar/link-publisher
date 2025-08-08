@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Link Publisher</title>
+    <title>{{ $website_setting->website_title ?? 'Default Title' }}</title>
 
     @include('website.layouts.inc.style')
 
@@ -17,7 +17,7 @@
     <!-- Header Start -->
     @include('website.layouts.inc.header')
     <!-- Header End -->
-    
+
 
     @yield('website_content')
     <!-- Unlock section End -->
