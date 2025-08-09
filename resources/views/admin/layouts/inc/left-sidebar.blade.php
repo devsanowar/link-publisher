@@ -34,12 +34,16 @@
                         <a href="{{ route('promobanner.index') }}"><span>Promo Banner</span></a>
                     </li>
 
+                    <li class="{{ request()->routeIs('brand.*') ? 'active' : '' }}">
+                        <a href="{{ route('brand.index') }}"><span>Featured Logo</span></a>
+                    </li>
+
                     <li class="{{ request()->routeIs('about.*') ? 'active' : '' }}">
                         <a href="{{ route('about.index') }}"><span>About</span></a>
                     </li>
 
-                    <li class="{{ request()->routeIs('why-choose-us.*') ? 'active' : '' }}">
-                        <a href="{{ route('why-choose-us.index') }}"><span>Why choose us</span></a>
+                    <li class="{{ request()->routeIs('why-to-chose-link-publisher.*') ? 'active' : '' }}">
+                        <a href="{{ route('whychoseus.index') }}"><span>Why choose us</span></a>
                     </li>
 
                     <li class="{{ request()->routeIs('cta.*') ? 'active' : '' }}">

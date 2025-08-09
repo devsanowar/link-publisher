@@ -23,7 +23,7 @@ class PromobannerStoreRequest extends FormRequest
     {
         return [
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:200',
-            'url' => 'required|url',
+            'url' => 'nullable|url',
         ];
     }
 }

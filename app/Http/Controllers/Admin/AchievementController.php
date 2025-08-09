@@ -38,12 +38,13 @@ class AchievementController extends Controller
         Achievement::create([
             'title' => $request->title,
             'count_number' => $request->count_number,
-            'image' => $achievementImage,
+            'image' => $achievementImage ?? 'default.png',
             'is_active' => $request->is_active,
         ]);
 
-        Toastr::success('Achievement added successfully.');
-        return redirect()->back();
+        return response()->json([
+            'message' => 'Achievement added successfully!',
+        ]);
     }
 
     /**

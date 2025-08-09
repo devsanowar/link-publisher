@@ -2,131 +2,45 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\WhyChoseUs;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Brian2694\Toastr\Facades\Toastr;
-use Intervention\Image\Laravel\Facades\Image;
-use App\Http\Requests\StoreWhyChooseUsRequest;
-use App\Http\Requests\UpdateWhyChooseUsRequest;
 
 class WhyChoseUsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $whyChose_us = WhyChoseUs::latest()->get(['id','title','description','image','is_active']);
-        return view('admin.layouts.pages.why_choose_us.index', compact('whyChose_us'));
+        $whyChoseUs = WhyChoseUs::first() ?? new WhyChoseUs();
+        return view('admin.layouts.pages.why_choose_us.index', compact('whyChoseUs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('admin.layouts.pages.why_choose_us.create');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreWhyChooseUsRequest $request)
+    public function update(Request $request, $id = null)
     {
-
-        $whychoseImage = $this->whychoseImage($request);
-        WhyChoseUs::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $whychoseImage,
-            'is_active' => $request->is_active,
+        $request->validate([
+            'title_one' => 'required|string|max:255',
+            'description_one' => 'nullable|string',
+            'image_one' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:2048',
         ]);
 
-        Toastr::success('Why Choose Us added successfully.');
-        return redirect()->back();
+        $whyChoseUs = $id ? WhyChoseUs::find($id) : WhyChoseUs::first();
 
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $whychooseUs = WhyChoseUs::find($id);
-        return view('admin.layouts.pages.why_choose_us.edit', compact('whychooseUs'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateWhyChooseUsRequest $request, string $id)
-    {
-        $whyChooseUs = WhyChoseUs::find($id);
-
-        $whyChooseUsNewImage = $this->whychoseImage($request);
-        if($whyChooseUsNewImage){
-            if (!empty($whyChooseUs->image)) {
-                $oldImagePath = public_path($whyChooseUs->image);
-                if (file_exists($oldImagePath) && is_file($oldImagePath)) {
-                    unlink($oldImagePath);
-                }
-            }
-            $whyChooseUs->image = $whyChooseUsNewImage;
+        if (!$whyChoseUs) {
+            $whyChoseUs = new WhyChoseUs();
         }
-        $whyChooseUs->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $whyChooseUs->image,
-            'is_active' => $request->is_active,
-        ]);
 
-        Toastr::success('Why Choose Us updated successfully.');
-        return redirect()->route('why-choose-us.index');
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $whyChoseUs = WhyChoseUs::find($id);
+        $whyChoseUs->title_one = $request->title_one;
+        $whyChoseUs->description_one = $request->description_one;
 
-        if($whyChoseUs){
-            if(!empty($whyChoseUs->image)){
-                $oldImagePath = public_path($whyChoseUs->image);
-                if(file_exists($oldImagePath)){
-                    unlink($oldImagePath);
-                }
-            }
+        if ($request->hasFile('image_one')) {
+            $fileName = time() . '.' . $request->image_one->extension();
+            $request->image_one->move(public_path('uploads/why_choose_us_image'), $fileName);
+            $whyChoseUs->image_one = 'uploads/why_choose_us_image/' . $fileName;
         }
-        $whyChoseUs->delete();
-        Toastr::success('Why Choose Us deleted successfully.');
-        return redirect()->route('service.index');
+
+        $whyChoseUs->save();
+
+        return response()->json(['message' => 'Data saved successfully!'], 200);
     }
-
-
-    // Image edit and update code here
-    private function whychoseImage(Request $request){
-        if ($request->hasFile('image')) {
-            $image = Image::read($request->file('image'));
-            $imageName = time() . '-' . $request->file('image')->getClientOriginalName();
-            $destinationPath = public_path('uploads/why_choose_us_image/');
-            $image->save($destinationPath . $imageName);
-            return 'uploads/why_choose_us_image/' . $imageName;
-
-        }
-        return null;
-    }
-
-
-
 }

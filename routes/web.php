@@ -3,12 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\HomeController;
 
 
 
 
-Route::get('/', [FrontendController::class, 'index'])->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 

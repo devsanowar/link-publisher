@@ -13,29 +13,35 @@ use App\Models\WebsiteSetting;
 use App\Models\WebsiteSocialIcon;
 use App\Http\Controllers\Controller;
 use App\Models\BannerHero;
+use App\Models\Brand;
 use App\Models\Privacypolicy;
 use App\Models\Returnrefund;
 use App\Models\Termscondition;
+use App\Models\WhyChoseUs;
 
-class FrontendController extends Controller
+use function Laravel\Prompts\select;
+
+class HomeController extends Controller
 {
     public function index()
     {
         $banner = BannerHero::first();
-        $promobanners = Promobanner::where('is_active', 1)
-            ->latest()
-            ->get(['id', 'image', 'url']);
+        $promobanner = Promobanner::where('is_active', 1)
+            ->first();
+        $brands = Brand::select(['id', 'image'])->latest()->get();
+
+
 
         $about = About::first();
         $social_icon = WebsiteSocialIcon::select(['id', 'messanger_url'])->first();
         // $website_setting = WebsiteSetting::select(['id', 'phone'])->first();
 
 
+        $whychoseuss = WhyChoseUs::where('is_active', 1)->get();
 
 
         $achievements = Achievement::where('is_active', 1)
-            ->latest()
-            ->get(['id', 'title', 'count_number', 'image']);
+            ->get(['id', 'title', 'count_number']);
 
         $reviews = Review::latest()->get(['id', 'name', 'profession', 'review', 'image']);
 
@@ -43,7 +49,7 @@ class FrontendController extends Controller
 
         $blogs = Post::latest()->take(3)->get();
 
-        return view('website.home', compact(['banner','achievements', 'reviews', 'about', 'blogs', 'promobanners', 'social_icon', 'cta']));
+        return view('website.home', compact(['banner', 'promobanner', 'brands','whychoseuss', 'achievements', 'reviews', 'about', 'blogs', 'social_icon', 'cta']));
     }
 
 

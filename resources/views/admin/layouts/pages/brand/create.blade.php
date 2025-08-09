@@ -13,7 +13,7 @@
                     <h4 class="text-uppercase"> Create Brand <span><a href="{{ route('brand.index') }}" class="btn btn-primary right">All Brand</a></span></h4>
                 </div>
                 <div class="body">
-                    <form class="form-horizontal" action="{{ route('brand.store') }}"
+                    <form id="brandForm" class="form-horizontal"
                         method="POST" enctype="multipart/form-data">
                         @csrf
 
@@ -70,5 +70,31 @@
 @endsection
 
 @push('scripts')
+
+<script>
+    $(document).ready(function(){
+        $('#brandForm').submit(function(e){
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('brand.store') }}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success:function(response){
+                    $('#brandForm')[0].reset();
+                    toastr.success(response.message);
+                },
+                error:function(xhr){
+                    toastr.error('Something went wrong!');
+                }
+            });
+        });
+    });
+</script>
+
 
 @endpush

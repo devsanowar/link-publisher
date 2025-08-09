@@ -34,19 +34,23 @@ class BrandController extends Controller
     {
         $request->validate([
             'brand_name' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:200',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // 2MB
+            'is_active' => 'nullable|boolean',
         ]);
 
         $brandImage = $this->brandImage($request);
+
         Brand::create([
             'brand_name' => $request->brand_name,
             'image' => $brandImage,
-            'is_active' => $request->is_active,
+            'is_active' => $request->is_active ?? 1,
         ]);
 
-        Toastr::success('Brand added successfully.');
-        return redirect()->back();
+        return response()->json([
+            'message' => 'Brand added successfully!',
+        ]);
     }
+
 
     /**
      * Display the specified resource.

@@ -2,7 +2,7 @@
         <nav class="navbar shadow fixed" id="mainNavbar">
             <div class="container">
                 <div class="navbar-brand">
-                    <a href="{{ route('home') }}l"><img src="{{ asset($website_setting->website_logo) }}" alt="Logo" /></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset($website_setting->website_logo) }}" alt="Logo" /></a>
                 </div>
                 <div class="nav-links">
                     <div class="nav-item nav-item-service">

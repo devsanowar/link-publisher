@@ -20,6 +20,11 @@ class PromobannerController extends Controller
 
     public function store(PromobannerStoreRequest $request)
     {
+        $promobanner = Promobanner::first();
+        if($promobanner){
+            Toastr::error('Multiple hero banner image not created.');
+            return redirect()->back();
+        }
         $promoBanner = $this->promoImage($request);
         Promobanner::create([
             'image' => $promoBanner,

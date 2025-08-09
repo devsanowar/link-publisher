@@ -27,7 +27,7 @@ class CtaStoreRequest extends FormRequest
             'content' =>'nullable',
             'button_name' =>'nullable|string|max:255',
             'button_url' =>'nullable|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:500',
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp,svg|max:500',
         ];
     }
 }

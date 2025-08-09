@@ -24,7 +24,7 @@ class StoreAchievementRequest extends FormRequest
         return [
             'title' => 'bail|required|string|max:255|unique:achievements,title',
             'count_number'   => 'required|numeric',
-            'image'         => 'required|image|mimes:jpeg,png,jpg,webp|max:20',
+            'image'         => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20',
             'is_active'     => 'required|in:0,1',
         ];
     }

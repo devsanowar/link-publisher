@@ -14,7 +14,7 @@
 
                 </div>
                 <div class="body">
-                    <form class="form-horizontal" action="{{ route('achievement.store') }}"
+                    <form id="achievementForm" class="form-horizontal"
                         method="POST" enctype="multipart/form-data">
                         @csrf
 
@@ -46,7 +46,7 @@
 
 
 
-                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
+                        {{-- <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
                             <label for="customFile"><b>Icon Image* (Image Size: 64 by 64 - Max size : 20kb )</b></label>
                             <div class="form-group">
                                 <div class="" style="border: 1px solid #ccc">
@@ -56,7 +56,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
                             <label for="brand_id"><b>Status</b></label>
@@ -86,4 +86,31 @@
 @endsection
 
 @push('scripts')
+
+
+<script>
+$(document).ready(function(){
+    $("#achievementForm").submit(function(e){
+        e.preventDefault();
+
+        let formData = new FormData(this);
+        
+        $.ajax({
+            url: "{{ route('achievement.store') }}",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success:function(response){
+                $('#achievementForm')[0].reset();
+                toastr.success(response.message);
+            },
+            error:function(xhr){
+                toastr.error('Something went wrong!');
+            },
+        });
+    });
+});
+</script>
+
 @endpush
