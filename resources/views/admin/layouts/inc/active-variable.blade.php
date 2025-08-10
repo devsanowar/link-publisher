@@ -1,5 +1,5 @@
 <?php
-$homePageRoutes = ['banner.*', 'about.*','brand.*', 'promobanner.*', 'whychoseus.*', 'achievement.*', 'review.*', 'faq.*', 'cta.*'];
+$homePageRoutes = ['banner.*', 'about.*','brand.*', 'promobanner.*', 'whychoseus.*','services.*', 'achievement.*', 'review.*', 'faq.*', 'cta.*'];
 $isHomePageActive = false;
 foreach ($homePageRoutes as $route) {
     if (request()->routeIs($route)) {

@@ -10,75 +10,51 @@
         <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="text-uppercase"> Create Service <span><a href="{{ route('service.index') }}" class="btn btn-primary right">All Services</a></span></h4>
+                    <h4 class="text-uppercase"> Create Service <span><a href="{{ route('services.index') }}" class="btn btn-primary right">All Services</a></span></h4>
 
                 </div>
                 <div class="body">
-                    <form class="form-horizontal" action="{{ route('service.store') }}"
-                        method="POST" enctype="multipart/form-data">
+                    <form id="serviceCreateForm" class="form-horizontal" method="POST">
                         @csrf
 
                         <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                            <label for="service_id"><b>Service Title*</b></label>
+                            <label for="icon"><b>Service Icon Class *</b></label>
                             <div class="form-group">
                                 <div class="" style="border: 1px solid #ccc">
-                                    <input type="text" id="service_id" name="service_title" class="form-control @error('service_title')invalid @enderror"
+                                    <input type="text" id="icon" name="icon" class="form-control @error('icon')invalid @enderror"
+                                        placeholder="Enter service icon ">
+                                </div>
+                                @error('icon')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
+                            <label for="title"><b>Service Title*</b></label>
+                            <div class="form-group">
+                                <div class="" style="border: 1px solid #ccc">
+                                    <input type="text" id="title" name="title" class="form-control @error('title')invalid @enderror"
                                         placeholder="Enter service title ">
                                 </div>
-                                @error('service_title')
+                                @error('title')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                            <label for="banner_description"><b>Service Description</b></label>
+                            <label for="url"><b>Service Url</b></label>
                             <div class="form-group">
                                 <div class="" style="border: 1px solid #ccc">
-                                    <textarea type="text" id="ckeditor" name="description" class="form-control" >
-                                    </textarea>
+                                    <input type="text" id="url" name="url" class="form-control @error('url')invalid @enderror"
+                                        placeholder="Enter service title ">
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                            <label for="service_url_id"><b>Project Url*</b></label>
-                            <div class="form-group">
-                                <div class="" style="border: 1px solid #ccc">
-                                    <input type="text" id="service_url_id" name="service_url" class="form-control @error('service_url')invalid @enderror"
-                                        placeholder="Enter service url ">
-                                </div>
-                                @error('service_url')
+                                @error('url')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
-
-                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                            <label for="customFile"><b>Service Icon Image* (Image Size: 64 by 64 - Max size : 20kb )</b></label>
-                            <div class="form-group">
-                                <div class="" style="border: 1px solid #ccc">
-                                    <input type="file" class="form-control @error('image')invalid @enderror" id="customFile" / name="image">
-                                </div>
-                                @error('image')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                            <label for="brand_id"><b>Status</b></label>
-                            <div class="form-group">
-                                <div class="" style="border: 1px solid #ccc">
-                                    <select name="is_active" class="form-control show-tick">
-                                        <option value="1">Active</option>
-                                        <option value="0">DeActive</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
 
                         <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7">
                             <button type="submit"
@@ -97,6 +73,31 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('backend') }}/assets/plugins/ckeditor/ckeditor.js"></script> <!-- Ckeditor -->
-<script src="{{ asset('backend') }}/assets/js/pages/forms/editors.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#serviceCreateForm").submit(function(e){
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('services.store') }}",
+                type:"POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
+                },
+                success:function(response){
+                    $("#serviceCreateForm")[0].reset();
+                    toastr.success(response.message);
+                },
+                error:function(xhr){
+                    toastr.error('Something went wrong');
+                }
+            });
+        })
+    });
+</script>
 @endpush

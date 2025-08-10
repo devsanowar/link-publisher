@@ -46,6 +46,10 @@
                         <a href="{{ route('whychoseus.index') }}"><span>Why choose us</span></a>
                     </li>
 
+                    <li class="{{ request()->routeIs('services.*') ? 'active' : '' }}">
+                        <a href="{{ route('services.index') }}"><span>Services</span></a>
+                    </li>
+
                     <li class="{{ request()->routeIs('cta.*') ? 'active' : '' }}">
                         <a href="{{ route('cta.index') }}"><span>CTA</span></a>
                     </li>

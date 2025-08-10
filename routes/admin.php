@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\BlocklistController;
 use App\Http\Controllers\Admin\AdminPanelController;
@@ -99,6 +100,15 @@ Route::prefix('admin')
 
             Route::get('why-to-chose-link-publisher', [WhyChoseUsController::class, 'index'])->name('whychoseus.index');
             Route::post('why-to-chose-link-publisher/update', [WhyChoseUsController::class, 'update'])->name('whychoseus.update');
+
+            // Services
+            Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+            Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
+            Route::post('/services/store', [ServiceController::class, 'store'])->name('services.store');
+            Route::post('/services/update/{id}', [ServiceController::class, 'update'])->name('services.update');
+            Route::post('/services/delete/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
+
+
 
             // Achievement
             Route::resource('achievement', AchievementController::class);

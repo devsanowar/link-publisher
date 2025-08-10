@@ -16,6 +16,7 @@ use App\Models\BannerHero;
 use App\Models\Brand;
 use App\Models\Privacypolicy;
 use App\Models\Returnrefund;
+use App\Models\Service;
 use App\Models\Termscondition;
 use App\Models\WhyChoseUs;
 
@@ -38,6 +39,7 @@ class HomeController extends Controller
 
 
         $whychoseus = WhyChoseUs::first();
+        $services = Service::all();
 
 
         $achievements = Achievement::where('is_active', 1)
@@ -49,7 +51,7 @@ class HomeController extends Controller
 
         $blogs = Post::latest()->take(3)->get();
 
-        return view('website.home', compact(['banner', 'promobanner', 'brands','whychoseus', 'achievements', 'reviews', 'about', 'blogs', 'social_icon', 'cta']));
+        return view('website.home', compact(['banner', 'promobanner', 'brands','whychoseus', 'achievements', 'reviews', 'about', 'blogs', 'social_icon', 'cta', 'services']));
     }
 
 
