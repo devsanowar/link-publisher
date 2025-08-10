@@ -42,7 +42,7 @@
                         <a href="{{ route('about.index') }}"><span>About</span></a>
                     </li>
 
-                    <li class="{{ request()->routeIs('why-to-chose-link-publisher.*') ? 'active' : '' }}">
+                    <li class="{{ request()->routeIs('whychoseus.*') ? 'active' : '' }}">
                         <a href="{{ route('whychoseus.index') }}"><span>Why choose us</span></a>
                     </li>
 

@@ -37,7 +37,7 @@ class HomeController extends Controller
         // $website_setting = WebsiteSetting::select(['id', 'phone'])->first();
 
 
-        $whychoseuss = WhyChoseUs::where('is_active', 1)->get();
+        $whychoseus = WhyChoseUs::first();
 
 
         $achievements = Achievement::where('is_active', 1)
@@ -49,7 +49,7 @@ class HomeController extends Controller
 
         $blogs = Post::latest()->take(3)->get();
 
-        return view('website.home', compact(['banner', 'promobanner', 'brands','whychoseuss', 'achievements', 'reviews', 'about', 'blogs', 'social_icon', 'cta']));
+        return view('website.home', compact(['banner', 'promobanner', 'brands','whychoseus', 'achievements', 'reviews', 'about', 'blogs', 'social_icon', 'cta']));
     }
 
 

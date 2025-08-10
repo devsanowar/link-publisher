@@ -12,13 +12,12 @@
                 <div class="col-md-6">
                     <div class="single-why-card">
                         <div class="single-why-img">
-                            <img src="{{ asset('frontend') }}/assets/images/why-us/front-controlled.svg"
+                            <img src="{{ asset($whychoseus->image_one) }}"
                                 class="img-fluid" alt="">
                         </div>
                         <div class="single-why-content">
-                            <h3>100% Transparency</h3>
-                            <p>Keep your link building process transparent. Easily select your niche, target websites
-                                based on Domain Authority (DA), and manage your budget at every step.</p>
+                            <h3>{{ $whychoseus->title_one ?? 'N/A'}}</h3>
+                            <p>{!! $whychoseus->description_one ?? 'N/A' !!}</p>
                         </div>
                     </div>
                 </div>
@@ -26,24 +25,23 @@
                 <div class="col-md-6">
                     <div class="singel-why-card-two">
                         <div class="singel-why-card-two-img">
-                            <img src="{{ asset('frontend') }}/assets/images/why-us/front-faster.svg" class="img-fluid"
+                            <img src="{{ asset($whychoseus->image_two) }}" class="img-fluid"
                                 alt="">
                         </div>
                         <div class="single-why-card-two-content">
-                            <h3>Turnaround Time</h3>
-                            <p>Get your links delivered <br> within 30–32 hours</p>
+                            <h3>{{ $whychoseus->title_two ?? 'N/A'}}</h3>
+                            <p>{!! $whychoseus->description_two ?? 'N/A' !!}</p>
                         </div>
                     </div>
                     <!-- single card -->
                     <div class="single-why-card">
                         <div class="single-why-img text-center">
-                            <img src="{{ asset('frontend') }}/assets/images/why-us/front-sites.svg" class="img-fluid"
+                            <img src="{{ asset($whychoseus->image_three) }}" class="img-fluid"
                                 alt="">
                         </div>
                         <div class="single-why-content">
-                            <h3>Niche-Relevant Guest Posting Sites</h3>
-                            <p>The platform provides high traffic and high quality link building opportunities for 55+
-                                niche-relevant websites that are SEO-friendly.</p>
+                            <h3>{{ $whychoseus->title_three ?? 'N/A'}}</h3>
+                            <p>{!! $whychoseus->description_three ?? 'N/A' !!}</p>
                         </div>
                     </div>
                 </div>
@@ -53,13 +51,12 @@
                 <div class="col-md-4">
                     <div class="single-why-card">
                         <div class="single-why-img">
-                            <img src="{{ asset('frontend') }}/assets/images/why-us/front-high.svg" class="img-fluid"
+                            <img src="{{ asset($whychoseus->image_four) }}" class="img-fluid"
                                 alt="">
                         </div>
                         <div class="single-why-content">
-                            <h3>100% Transparency</h3>
-                            <p>Keep your link building process transparent. Easily select your niche, target websites
-                                based on Domain Authority (DA), and manage your budget at every step.</p>
+                            <h3>{{ $whychoseus->title_four ?? 'N/A'}}</h3>
+                            <p>{!! $whychoseus->description_four ?? 'N/A' !!}</p>
                         </div>
                     </div>
                 </div>
@@ -85,13 +82,12 @@
                     <!-- singel-why-card-three -->
                     <div class="singel-why-card-three">
                         <div class="singel-why-card-three-img">
-                            <img src="{{ asset('frontend') }}/assets/images/why-us/front-earn.svg" class="img-fluid"
+                            <img src="{{ asset($whychoseus->image_five) }}" class="img-fluid"
                                 alt="">
                         </div>
                         <div class="singel-why-card-three-content">
-                            <h3>Earn High-Quality Backlinks</h3>
-                            <p>Boost your Google SERP rankings by earning high-quality backlinks from authoritative,
-                                high-traffic websites as part of your comprehensive link building efforts.</p>
+                            <h3>{{ $whychoseus->title_five ?? 'N/A'}}</h3>
+                            <p>{!! $whychoseus->description_five ?? 'N/A' !!}</p>
                         </div>
                     </div>
                 </div>

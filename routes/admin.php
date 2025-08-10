@@ -98,7 +98,7 @@ Route::prefix('admin')
             // Why chose us
 
             Route::get('why-to-chose-link-publisher', [WhyChoseUsController::class, 'index'])->name('whychoseus.index');
-            Route::put('why-to-chose-link-publisher/{id?}', [WhyChoseUsController::class, 'update'])->name('whychoseus.update');
+            Route::post('why-to-chose-link-publisher/update', [WhyChoseUsController::class, 'update'])->name('whychoseus.update');
 
             // Achievement
             Route::resource('achievement', AchievementController::class);
