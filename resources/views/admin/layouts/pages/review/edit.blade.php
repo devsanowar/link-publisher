@@ -18,6 +18,18 @@
                         method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+
+                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
+                            <label for="type"><b>Review Type</b></label>
+                            <div class="form-group">
+                                <select class="form-control show-tick" name="type">
+                                    <option>Select type...</option>
+                                    <option {{ $review->type === 'text' ? 'selected' : '' }} value="text">Text</option>
+                                    <option {{ $review->type === 'video' ? 'selected' : '' }} value="video">Video</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
                             <label for="review_name_id"><b>Name*</b></label>
                             <div class="form-group">
@@ -31,31 +43,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                            <label for="profession_id"><b>Profession*</b></label>
-                            <div class="form-group">
-                                <div class="" style="border: 1px solid #ccc">
-                                    <input type="text" id="profession_id" name="profession" class="form-control @error('profession')invalid @enderror"
-                                         placeholder="Enter Profession " value="{{ $review->profession }}">
-                                </div>
-                                @error('profession')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
 
-                        {{-- <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                            <label for="review_number_id"><b>Review Number*</b></label>
-                            <div class="form-group">
-                                <div class="" style="border: 1px solid #ccc">
-                                    <input type="text" id="review_number_id" name="review_number" class="form-control @error('review_number')invalid @enderror"
-                                        placeholder="Enter review number " value="{{ $review->review_number }}">
-                                </div>
-                                @error('review_number')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div> --}}
 
                         <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
                             <label for="review_content"><b>Review Content*</b></label>
@@ -79,6 +67,19 @@
                                 </div>
                                 <img class="mt-2" src="{{ asset($review->image) }}" alt="" width="40">
                                 @error('image')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
+                            <label for="video_url"><b>Video Url</b></label>
+                            <div class="form-group">
+                                <div class="" style="border: 1px solid #ccc">
+                                    <input type="text" id="video_url" name="video_url" class="form-control @error('video_url')invalid @enderror"
+                                        placeholder="Enter Video Url " value="{{ $review->video_url }}">
+                                </div>
+                                @error('video_url')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

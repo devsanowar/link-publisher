@@ -23,10 +23,10 @@ class StoreReviewRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'profession' => 'required|string|max:255',
-            // 'review_number'   => 'required',
-            'review'   => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:200',
+            'type' => 'required|string',
+            'review'   => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:200',
+            'video_url' => 'nullable|url',
         ];
     }
 }

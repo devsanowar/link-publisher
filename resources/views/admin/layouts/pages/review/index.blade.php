@@ -28,8 +28,10 @@
                             <tr>
                                 <th>S/N</th>
                                 <th style="width: 40px">Image</th>
+                                <th>Video URL</th>
+								<th>Review Type</th>
 								<th>Name</th>
-								<th>Description</th>
+								<th>Review</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -38,9 +40,11 @@
                             @foreach ($reviews as $key=>$review)
                             <tr>
                                 <td>{{$key+1 }}</td>
-                                <td><img src="{{ asset($review->image) }}" alt="" width="30"></td>
-								<td>{{ $review->name }}</td>
-								<td>{!! Str::words($review->review, 6, '...') !!}</td>
+                                <td><img src="{{ asset($review->image) ?? 'N/A' }}" alt="" width="30"></td>
+								<td>{{ $review->video_url ?? 'N/A' }}</td>
+								<td>{{ $review->type ?? 'N/A' }}</td>
+								<td>{{ $review->name ?? 'N/A'}}</td>
+								<td>{!! Str::words($review->review, 6, '...') ?? 'N/A' !!}</td>
 
                                 <td>
 

@@ -8,3 +8,4 @@
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('frontend') }}/assets/images/favicon.png" type="image/png">
+    @stack('styles')

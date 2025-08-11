@@ -37,14 +37,15 @@ class ReviewController extends Controller
         $addReviewImage = $this->reviewImage($request);
         Review::create([
             'name' => $request->name,
-            'profession' => $request->profession,
-            'review_number' => $request->review_number,
+            'type' => $request->type,
             'review' => $request-> review,
             'image' => $addReviewImage,
+            'video_url' => $request->video_url,
         ]);
 
-        Toastr::success('Review added successfully.');
-        return redirect()->back();
+        return response()->json([
+            'message' => 'Review successfuly added!',
+        ]);
 
     }
 
@@ -82,11 +83,11 @@ class ReviewController extends Controller
             $review->image = $reviewNewImage;
         }
         $review->update([
+            'type' => $request->type,
             'name' => $request->name,
-            'profession' => $request->profession,
-            'review_number' => $request->review_number,
             'review' => $request->review,
             'image' => $review->image,
+            'video_url' => $request->video_url,
         ]);
 
         Toastr::success('Review updated successfully.');

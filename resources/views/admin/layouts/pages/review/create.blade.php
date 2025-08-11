@@ -14,9 +14,20 @@
 
                 </div>
                 <div class="body">
-                    <form class="form-horizontal" action="{{ route('review.store') }}"
-                        method="POST" enctype="multipart/form-data">
+                    <form id="reviewCreateForm" class="form-horizontal" enctype="multipart/form-data">
                         @csrf
+
+                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
+                            <label for="type"><b>Review Type</b></label>
+                            <div class="form-group">
+                                <select class="form-control show-tick" name="type">
+                                    <option>Select type...</option>
+                                    <option value="text">Text</option>
+                                    <option value="video">Video</option>
+                                </select>
+                            </div>
+                        </div>
+
 
                         <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
                             <label for="review_name_id"><b>Name*</b></label>
@@ -31,34 +42,9 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                            <label for="profession_id"><b>Profession*</b></label>
-                            <div class="form-group">
-                                <div class="" style="border: 1px solid #ccc">
-                                    <input type="text" id="profession_id" name="profession" class="form-control @error('profession')invalid @enderror"
-                                         placeholder="Enter Profession ">
-                                </div>
-                                @error('profession')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        {{-- <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                            <label for="review_number_id"><b>Review Number*</b></label>
-                            <div class="form-group">
-                                <div class="" style="border: 1px solid #ccc">
-                                    <input type="text" id="review_number_id" name="review_number" class="form-control @error('review_number')invalid @enderror"
-                                        placeholder="Enter review number ">
-                                </div>
-                                @error('review_number')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div> --}}
 
                         <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                            <label for="review_content"><b>Review Content*</b></label>
+                            <label for="review_content"><b>Review Content</b></label>
                             <div class="form-group">
                                 <div class="" style="border: 1px solid #ccc">
                                     <textarea type="text" rows="4" name="review" class="form-control @error('review')invalid @enderror" ></textarea>
@@ -83,6 +69,19 @@
                             </div>
                         </div>
 
+                        <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
+                            <label for="video_url"><b>Video Url</b></label>
+                            <div class="form-group">
+                                <div class="" style="border: 1px solid #ccc">
+                                    <input type="text" id="video_url" name="video_url" class="form-control @error('video_url')invalid @enderror"
+                                        placeholder="Enter Video Url ">
+                                </div>
+                                @error('video_url')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
 
                         <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7">
                             <button type="submit"
@@ -101,5 +100,31 @@
 @endsection
 
 @push('scripts')
+<script>
+    $(document).ready(function(){
+        $("#reviewCreateForm").submit(function(e){
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url:"{{ route('review.store') }}",
+                type: "POST",
+                data: formData,
+                processData:false,
+                contentType:false,
+
+                success:function(response){
+                    $("#reviewCreateForm")[0].reset();
+                    $("#reviewCreateForm select").val('');
+                    toastr.success(response.message);
+                },
+                error:function(xhr){
+                    toastr.error('Something went wrong!');
+                }
+            });
+        });
+    });
+</script>
 
 @endpush

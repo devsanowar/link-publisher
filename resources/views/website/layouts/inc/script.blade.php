@@ -43,3 +43,5 @@
     </script>
     <!-- sticky menu -->
     <script src="{{ asset('frontend') }}/assets/js/sticky-menu.js"></script>
+
+    @stack('scripts')

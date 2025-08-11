@@ -45,7 +45,7 @@ class HomeController extends Controller
         $achievements = Achievement::where('is_active', 1)
             ->get(['id', 'title', 'count_number']);
 
-        $reviews = Review::latest()->get(['id', 'name', 'profession', 'review', 'image']);
+        $reviews = Review::latest()->get();
 
         $cta = Cta::where('is_active', 1)->first();
 
