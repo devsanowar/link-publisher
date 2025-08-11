@@ -25,7 +25,7 @@
                         <thead>
                             <tr>
                                 <th>S/N</th>
-                                <th>Phone</th>
+                                <th>Email</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -34,7 +34,7 @@
                             @foreach ($subscribers as $key=>$subscriber)
                             <tr>
                                 <td>{{$key+1 }}</td>
-								<td>{{ $subscriber->phone }}</td>
+								<td>{{ $subscriber->email }}</td>
                                 <td>
 
                                     <form class="d-inline-block" action="{{ route('newslatter.destroy', $subscriber->id) }}" method="POST">

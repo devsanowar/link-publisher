@@ -10,7 +10,7 @@ use Brian2694\Toastr\Facades\Toastr;
 class NewslatterController extends Controller
 {
     public function index(){
-        $subscribers = NewsletterSubscriber::latest()->get();
+        $subscribers = NewsletterSubscriber::select('id','email')->latest()->get();
         return view('admin.layouts.pages.subscriber.index', compact('subscribers'));
     }
 

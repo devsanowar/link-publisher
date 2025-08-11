@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\WebsiteSetting;
+use App\Models\WebsiteSocialIcon;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Fetch website settings once
         $setting = WebsiteSetting::first();
+        $socialSetting = WebsiteSocialIcon::first();
 
         if ($setting) {
             // Dynamically set app.name
@@ -41,6 +43,10 @@ class AppServiceProvider extends ServiceProvider
 
             // Share globally to all blade views
             View::share('website_setting', $setting);
+        }
+
+        if($socialSetting){
+            View::share('social_setting', $socialSetting);
         }
 
         // Set Bootstrap for Pagination

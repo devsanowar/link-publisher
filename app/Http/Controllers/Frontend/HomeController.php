@@ -18,6 +18,7 @@ use App\Models\Privacypolicy;
 use App\Models\Returnrefund;
 use App\Models\Service;
 use App\Models\Termscondition;
+use App\Models\User;
 use App\Models\WhyChoseUs;
 
 use function Laravel\Prompts\select;
@@ -37,6 +38,10 @@ class HomeController extends Controller
         $social_icon = WebsiteSocialIcon::select(['id', 'messanger_url'])->first();
         // $website_setting = WebsiteSetting::select(['id', 'phone'])->first();
 
+        $publishers = User::where('system_admin', 'publisher')->select(['id','system_admin','image'])->get();
+        $publisherCount = $publishers->count();
+
+
 
         $whychoseus = WhyChoseUs::first();
         $services = Service::all();
@@ -51,7 +56,7 @@ class HomeController extends Controller
 
         $blogs = Post::latest()->take(3)->get();
 
-        return view('website.home', compact(['banner', 'promobanner', 'brands','whychoseus', 'achievements', 'reviews', 'about', 'blogs', 'social_icon', 'cta', 'services']));
+        return view('website.home', compact(['banner', 'promobanner', 'brands','whychoseus', 'achievements', 'reviews', 'about', 'blogs', 'social_icon', 'cta', 'services','publishers','publisherCount']));
     }
 
 

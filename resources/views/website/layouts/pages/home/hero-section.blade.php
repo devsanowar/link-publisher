@@ -23,10 +23,11 @@
     <p class="text-muted small live-link-money-back"> <i class="fa-solid fa-square-check"></i> {!! $banner->guarantee_text ?? 'Live link or
         money back/replacement guarantee' !!}</p>
     <div style="margin: 1rem 0;">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle" width="40">
-        <img src="https://randomuser.me/api/portraits/women/47.jpg" class="rounded-circle" width="40">
-        <img src="https://randomuser.me/api/portraits/men/40.jpg" class="rounded-circle" width="40">
-        <span class="small">Loved by 6,000+ customers</span>
+
+        @foreach ($publishers as $publisher)
+        <img src="{{ asset($publisher->image) }}" class="rounded-circle" width="40">
+        @endforeach
+        <span class="small">Loved by {{ $publisherCount }}+ customers</span>
     </div>
     <p class="text-muted small mb-3">We are Integrated with</p>
     <div class="trusted-by">

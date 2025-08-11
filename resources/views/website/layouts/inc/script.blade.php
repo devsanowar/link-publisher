@@ -1,4 +1,5 @@
-<!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
     <script src="{{ asset('frontend') }}/assets/js/bootstrap.bundle.min.js"></script>
     <!-- Font Awesome -->
     <script src="{{ asset('frontend') }}/assets/js/all.min.js"></script>
@@ -43,5 +44,6 @@
     </script>
     <!-- sticky menu -->
     <script src="{{ asset('frontend') }}/assets/js/sticky-menu.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     @stack('scripts')

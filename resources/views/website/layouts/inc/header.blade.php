@@ -202,8 +202,8 @@
                     </div>
 
 
-                    <a href="#" class="btn btn-outline-link-publisher">My Dashboard</a>
-                    <a href="#" class="btn btn-link-publisher-primary">Sign Up</a>
+                    <a href="{{ route('publisher.dashboard') }}" class="btn btn-outline-link-publisher">My Dashboard</a>
+                    <a href="{{ route('register.index') }}" class="btn btn-link-publisher-primary">Sign Up</a>
                 </div>
 
                 <div class="mobile-toggle" onclick="toggleMenu()">&#9776;</div>
@@ -244,8 +244,8 @@
                 <div class="nav-item"><a href="#">Tools</a></div>
                 <div class="nav-item"><a href="#">Company</a></div>
                 <div class="nav-item"><a href="#">Resources</a></div>
-                <a href="#" class="btn btn-outline">My Dashboard</a>
-                <a href="#" class="btn btn-orange">Sign Up</a>
+                <a href="{{ route('publisher.dashboard') }}" class="btn btn-outline">My Dashboard</a>
+                <a href="{{ route('register.index') }}" class="btn btn-orange">Sign Up</a>
             </div>
         </div>
 
