@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\AboutPageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,8 @@ use App\Http\Controllers\Frontend\NewslatterController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('newslatter/store', [NewslatterController::class, 'store'])->name('newslatter.store');
+
+Route::get('About-page', [AboutPageController::class, 'index'])->name('about_page');
 
 
 

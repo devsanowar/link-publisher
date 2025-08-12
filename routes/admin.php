@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\PrivacypolicyController;
 use App\Http\Controllers\Admin\WebsiteSettingController;
 use App\Http\Controllers\Admin\TermsAdnCondiotnController;
+use App\Http\Controllers\Admin\AboutPageAboutController;
 
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])
@@ -138,6 +139,19 @@ Route::prefix('admin')
         });
 
 
+        // About Page
+        Route::prefix('about-page')->group(function () {
+            Route::get('/', [AboutPageController::class, 'index'])->name('about_page.page');
+            Route::post('/about/company/update', [AboutPageAboutController::class, 'update'])->name('about.company.update');
+
+            Route::get('/mission/vision', [AboutPageController::class, 'missionVision'])->name('mission_vision.page');
+
+            Route::post('/chairman/mission/update', [AboutPageController::class, 'missionUpdate'])->name('mission.update');
+            Route::post('/chairman/vision/update', [AboutPageController::class, 'visionUpdate'])->name('vision.update');
+        });
+
+
+
         // Order routes Here
         Route::get('order', [OrderController::class, 'index'])->name('order.index');
         Route::get('orders-show/{id}', [OrderController::class, 'show'])->name('orders.show');
@@ -171,16 +185,7 @@ Route::prefix('admin')
         Route::resource('post', PostController::class);
         Route::post('/post/status-change', [PostController::class, 'postChangeStatus'])->name('post.status');
 
-        // About Page
-        Route::prefix('about-page')->group(function () {
-            Route::get('/', [AboutPageController::class, 'index'])->name('about_page.page');
-            Route::post('/chairman/update/{id}', [AboutPageController::class, 'update'])->name('chairman.update');
-
-            Route::get('/mission/vision', [AboutPageController::class, 'missionVision'])->name('mission_vision.page');
-
-            Route::post('/chairman/mission/update', [AboutPageController::class, 'missionUpdate'])->name('mission.update');
-            Route::post('/chairman/vision/update', [AboutPageController::class, 'visionUpdate'])->name('vision.update');
-        });
+        
 
         // Contact form message route
         Route::get('message', [InboxController::class, 'index'])->name('inboxed_message');

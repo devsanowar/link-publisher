@@ -146,7 +146,7 @@
                         <div class="dropdown-company-menu">
                             <ul class="company-list">
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('about_page') }}">
                                         <i class="fas fa-users"></i>
                                         <span>About Us</span>
                                     </a>

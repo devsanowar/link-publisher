@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <script src="{{ asset('backend') }}/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
 <script src="{{ asset('backend') }}/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
 
@@ -10,6 +12,7 @@
 <script src="{{ asset('backend') }}/assets/js/pages/index.js"></script>
 <script src="{{ asset('backend') }}/assets/js/pages/charts/jquery-knob.min.js"></script>
 <script src="{{ asset('backend') }}/assets/js/toastr.min.js"></script>
+
 
 {!! Toastr::message() !!}
 

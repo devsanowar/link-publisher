@@ -28,7 +28,7 @@
                 <div>
                     <h4 class="text-center mb-0">
                         <div class="d-flex justify-content-center">
-                            <a href="{{ route('mission_vision.page') }}"
+                            <a href=""
                                 class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
                                 + Our Mission And Vision
                             </a>
@@ -44,57 +44,34 @@
             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class=""> Chariman Information</h4>
+                        <h4 class="">About Company</h4>
                     </div>
                     <div class="body">
-                        <form class="form-horizontal" action="{{ route('chairman.update', $chairman->id) }}"
-                            method="POST" enctype="multipart/form-data">
+                        <form id="aboutCompanyForm" class="form-horizontal" method="POST" action="{{ route('about.company.update') }}">
                             @csrf
 
                             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                                <label for="name_id"><b>Name</b></label>
+                                <label for="title"><b>About Title</b></label>
                                 <div class="form-group">
                                     <div class="" style="border: 1px solid #ccc">
-                                        <input type="text" id="name_id" name="name" class="form-control"
-                                            placeholder="Enter Full Name "
-                                            value="{{ $chairman->name }}">
+                                        <input type="text" id="title" name="title" class="form-control"
+                                            placeholder="Enter Title "
+                                            value="{{ $aboutPageAbout->title }}">
                                     </div>
                                 </div>
                             </div>
 
+                           
+
                             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                                <label for="position_id"><b>Position</b></label>
+                                <label for="about_content"><b>About Contents</b></label>
                                 <div class="form-group">
                                     <div class="" style="border: 1px solid #ccc">
-                                        <input type="text" id="position_id" name="position" class="form-control"
-                                            placeholder="Enter Position "
-                                            value="{{ $chairman->position }}">
+                                        <textarea type="text" id="ckeditor" name="about_content" class="form-control">{!! $aboutPageAbout->about_content !!}</textarea>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                                <label for="about_chairman"><b>About Chairman</b></label>
-                                <div class="form-group">
-                                    <div class="" style="border: 1px solid #ccc">
-                                        <textarea type="text" id="ckeditor" name="about_chairman" class="form-control">{!! $chairman->about_chairman !!}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                                <label for="customFile"><b>Chairman Image (Image Size:1000 by 1000 and Max size:120kb)</b></label>
-                                <div class="form-group">
-                                    <div class="mb-2" style="border: 1px solid #ccc">
-                                        <input type="file" class="form-control  @error('image') is-invalid @enderror" id="customFile" name="image" />
-                                    </div>
-                                </div>
-                                <img src="{{ asset($chairman->image) }}" alt="" width="40">
-                                @error('image')
-                                <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7">
                                 <button type="submit"
@@ -114,4 +91,44 @@
 @push('scripts')
 <script src="{{ asset('backend') }}/assets/plugins/ckeditor/ckeditor.js"></script> <!-- Ckeditor -->
 <script src="{{ asset('backend') }}/assets/js/pages/forms/editors.js"></script>
+
+<script>
+    $(document).ready(function(){
+    $("#aboutCompanyForm").submit(function(e){
+        e.preventDefault();
+
+        let formData = $(this).serialize();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: "POST",
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: (response) => {
+                
+                toastr.options = {
+                    timeOut: 1500,
+                    extendedTimeOut: 1000,
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: 'toast-top-right'
+                };
+
+                toastr.success(response.message);
+
+            },
+            error: (xhr) => {
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    toastr.error(xhr.responseJSON.message);
+                } else {
+                    toastr.error('Something went wrong!');
+                }
+            },
+        });
+    });
+});
+
+</script>
 @endpush
