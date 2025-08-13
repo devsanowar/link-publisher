@@ -291,33 +291,6 @@
 @endsection
 
 @push('scripts')
-    {{-- <script>
-        $(document).ready(function() {
-            $("#whychoseUsForm").submit(function(e) {
-                e.preventDefault();
-
-                let formData = new FormData(this);
-
-                $.ajax({
-                    url: "{{ route('whychoseus.update', $whyChoseUs->id ?? '') }}",
-                    type: 'POST', // Always POST
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'X-HTTP-Method-Override': 'PUT' // Override to PUT
-                    },
-                    success: function(response) {
-                        toastr.success(response.message);
-                    },
-                    error: function(xhr) {
-                        toastr.error('Something went wrong!');
-                    }
-                });
-            });
-        });
-    </script> --}}
 
     <script>
     $(".multiForm").submit(function(e){

@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="header">
                         <h2 class="text-uppercase"> About Information Update <span><a href="{{ route('about.index') }}"
-                                    class="btn btn-primary right">All Brand</a></span></h2>
+                                    class="btn btn-primary right">All About</a></span></h2>
                     </div>
                     <div class="body">
                         <form class="form-horizontal" action="{{ route('about.update') }}" method="POST"

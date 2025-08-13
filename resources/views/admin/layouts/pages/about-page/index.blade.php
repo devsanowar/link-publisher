@@ -28,9 +28,9 @@
                 <div>
                     <h4 class="text-center mb-0">
                         <div class="d-flex justify-content-center">
-                            <a href=""
+                            <a href="{{ route('company.story.index') }}"
                                 class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
-                                + Our Mission And Vision
+                                + Our Story
                             </a>
                         </div>
                     </h4>
@@ -85,6 +85,7 @@
 
 
         </div>
+
     </div>
 @endsection
 

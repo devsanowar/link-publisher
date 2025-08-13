@@ -14,7 +14,7 @@ use Intervention\Image\Laravel\Facades\Image;
 class AboutPageController extends Controller
 {
     public function index(){
-        $aboutPageAbout = AboutPageAbout::first();
+        $aboutPageAbout = AboutPageAbout::first() ?? new AboutPageAbout();
         return view('admin.layouts.pages.about-page.index', compact('aboutPageAbout'));
     }
 

@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CtaController;
 use App\Http\Controllers\Admin\FaqController;
@@ -32,6 +31,7 @@ use App\Http\Controllers\Admin\PrivacypolicyController;
 use App\Http\Controllers\Admin\WebsiteSettingController;
 use App\Http\Controllers\Admin\TermsAdnCondiotnController;
 use App\Http\Controllers\Admin\AboutPageAboutController;
+use App\Http\Controllers\Admin\OurStoryController;
 
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])
@@ -69,7 +69,6 @@ Route::prefix('admin')
             Route::get('social-icon', [SocialIconController::class, 'socialIcon'])->name('website_social_icon.index');
             Route::post('social-icon/update', [SocialIconController::class, 'socialIconUpdate'])->name('website_social_icon.update');
         });
-
 
         // Admin Panel Settings
         Route::prefix('admin-panel')->group(function () {
@@ -109,8 +108,6 @@ Route::prefix('admin')
             Route::post('/services/update/{id}', [ServiceController::class, 'update'])->name('services.update');
             Route::post('/services/delete/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
 
-
-
             // Achievement
             Route::resource('achievement', AchievementController::class);
 
@@ -131,26 +128,26 @@ Route::prefix('admin')
             Route::delete('/promobanner/delete/{id}', [PromobannerController::class, 'destroy'])->name('promobanner.destroy');
             Route::post('/promobanner/status-change', [PromobannerController::class, 'PromoBannerChangeStatus'])->name('promobanner.status');
 
-
             // Cta routes here
             Route::resource('cta', CtaController::class);
             Route::post('/cta/status-change', [CtaController::class, 'ctaChangeStatus'])->name('cta.status');
-
         });
-
 
         // About Page
         Route::prefix('about-page')->group(function () {
             Route::get('/', [AboutPageController::class, 'index'])->name('about_page.page');
             Route::post('/about/company/update', [AboutPageAboutController::class, 'update'])->name('about.company.update');
+            Route::get('/company/story', [OurStoryController::class, 'index'])->name('company.story.index');
+
+            Route::post('/company-story/update-section-one', [OurStoryController::class, 'updateSectionOne'])->name('company.story.updateOne');
+            Route::post('/company-story/update-section-two', [OurStoryController::class, 'updateSectionTwo'])->name('company.story.updateTwo');
+            Route::post('/company-story/update-section-three', [OurStoryController::class, 'updateSectionThree'])->name('company.story.updateThree');
 
             Route::get('/mission/vision', [AboutPageController::class, 'missionVision'])->name('mission_vision.page');
 
             Route::post('/chairman/mission/update', [AboutPageController::class, 'missionUpdate'])->name('mission.update');
             Route::post('/chairman/vision/update', [AboutPageController::class, 'visionUpdate'])->name('vision.update');
         });
-
-
 
         // Order routes Here
         Route::get('order', [OrderController::class, 'index'])->name('order.index');
@@ -162,7 +159,6 @@ Route::prefix('admin')
         Route::get('trashed-order', [OrderController::class, 'trashedData'])->name('trashed_order.index');
         Route::get('restore-order/{id}', [OrderController::class, 'restoreData'])->name('order.restore');
         Route::delete('order/force-delete/{id}', [OrderController::class, 'forceDeleteData'])->name('order.forceDelete');
-
 
         // payment method routes here
         Route::get('payment_method', [PaymentMethodController::class, 'index'])->name('payment_method.index');
@@ -185,8 +181,6 @@ Route::prefix('admin')
         Route::resource('post', PostController::class);
         Route::post('/post/status-change', [PostController::class, 'postChangeStatus'])->name('post.status');
 
-        
-
         // Contact form message route
         Route::get('message', [InboxController::class, 'index'])->name('inboxed_message');
         Route::get('message-show/{id}', [InboxController::class, 'show'])->name('message.show');
@@ -195,8 +189,6 @@ Route::prefix('admin')
         // Newsletter
         Route::get('Newslatter', [NewslatterController::class, 'index'])->name('newslatter');
         Route::get('Newslatter/destroy/{id}', [NewslatterController::class, 'destroy'])->name('newslatter.destroy');
-
-
 
         // block list routes
         Route::get('block-list', [BlocklistController::class, 'index'])->name('block.list');
@@ -218,13 +210,8 @@ Route::prefix('admin')
         // Website Color routes
         Route::get('website-color', [WebsiteColorController::class, 'edit'])->name('website_color.edit');
         Route::put('/website-color/update/{id}', [WebsiteColorController::class, 'update'])->name('website_color.update');
-
-
     });
 
-
-
-
-    Route::middleware(['visitorlogger'])->group(function () {
+Route::middleware(['visitorlogger'])->group(function () {
     Route::get('/visitor-logs', [VisitorLogController::class, 'index'])->name('visitors.index');
 });
