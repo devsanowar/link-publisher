@@ -14,6 +14,14 @@
                                 class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
                                 + Our Story
                             </a>
+                            <a href="{{ route('about_page.cta.index') }}"
+                                class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
+                                + Add CTA
+                            </a>
+                            <a href="{{ route('founder.index') }}"
+                                class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
+                                + Add Founder
+                            </a>
                         </div>
                     </h4>
                 </div>

@@ -266,7 +266,6 @@ Company Body Section Start
   font-weight: 500;
   color: #275570;
   line-height: 1.3;
-  margin-bottom: 0;
   padding: 40px 0 24px;
 }
 .our-co-founder img:nth-of-type(2) {
@@ -290,4 +289,120 @@ Company Body Section Start
   opacity: 0.6;
   line-height: 1.8;
   margin-bottom: 0;
+}
+
+
+
+.our-team {
+    padding: 60px 0;
+}
+
+/* Section Title */
+.our-team-section-title {
+    text-align: left;
+    font-size: 28px; /* Adjust size */
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 20px; /* Space between title and team */
+    position: relative;
+    line-height: 1.3;
+
+}
+
+
+
+.our-team-member {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    border: 2px solid #f7f7f7;
+    position: relative; /* pseudo-element এর জন্য */
+    overflow: hidden;
+    transition: transform 0.4s ease;
+    cursor: pointer;
+}
+
+.our-team-member:hover {
+    transform: translateY(-6px);
+}
+
+/* Progress border effect */
+.our-team-member::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px; /* progress bar height */
+    width: 0%;
+    background: var(--web-hover-primary); /* progress color */
+    transition: width 0.5s ease;
+}
+
+.our-team-member:hover::after {
+    width: 100%;
+}
+
+/* Image styling */
+.our-team-img {
+    overflow: hidden;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 15px;
+    border: 2px solid #f7f7f7;
+    transition: all 0.4s ease;
+}
+
+.our-team-member:hover .our-team-img {
+    border-color: var(--web-hover-primary);
+}
+
+.our-team-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.4s ease;
+}
+
+.our-team-member:hover .our-team-img img {
+    transform: scale(1.05);
+}
+
+/* Text */
+.our-team-member h5 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 5px;
+}
+
+.our-team-member p {
+    font-size: 14px;
+    color: #777;
+}
+
+
+/* Fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+    .our-team-img {
+        width: 120px;
+        height: 120px;
+    }
 }

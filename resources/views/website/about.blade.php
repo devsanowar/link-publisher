@@ -15,21 +15,7 @@
         @include('website.layouts.pages.about.achievement-section')
         <!-- Achivement section End -->
         <!-- ready-posting section Start -->
-        <section class="ready-posting about-posting">
-            <div class="container">
-                <div class="posting-body text-center">
-                    <div class="single-posting-content">
-                        <h3>Ready to reap the benefits of link building?</h3>
-                        <p>Join us today and experience a smarter way to achieve your SEO goals.</p>
-                    </div>
-                    <div class="about-posting-btn">
-                        <div class="lets-get-start-btn text-end">
-                            <button class="btn btn-get-started">Talk to Our Experts</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        @include('website.layouts.pages.about.cta-section')
         <!-- ready-posting section End -->
         <section class="our-team-section">
             <div class="container">
@@ -78,9 +64,13 @@
                         </div>
                     </div>
                 </div>
-                <h3>Fueled by caffeine &amp; driven by deadlines, this team delivers results.</h3>
+                
                 <div class="our-team">
                     <div class="row">
+                        <h3 class="our-team-section-title">
+                            Fueled by caffeine &amp; driven by deadlines, this team delivers results.
+                        </h3>
+
                         <!-- single team member -->
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3">
                             <div class="our-team-member">
@@ -178,3 +168,14 @@
 
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const members = document.querySelectorAll(".fade-in");
+            members.forEach((el, i) => {
+                el.style.animationDelay = `${i * 0.15}s`;
+            });
+        });
+    </script>
+@endpush

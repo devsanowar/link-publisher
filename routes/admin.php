@@ -31,6 +31,8 @@ use App\Http\Controllers\Admin\PrivacypolicyController;
 use App\Http\Controllers\Admin\WebsiteSettingController;
 use App\Http\Controllers\Admin\TermsAdnCondiotnController;
 use App\Http\Controllers\Admin\AboutPageAboutController;
+use App\Http\Controllers\Admin\AboutPageCtaController;
+use App\Http\Controllers\Admin\FounderController;
 use App\Http\Controllers\Admin\OurStoryController;
 
 Route::prefix('admin')
@@ -143,7 +145,10 @@ Route::prefix('admin')
             Route::post('/company-story/update-section-two', [OurStoryController::class, 'updateSectionTwo'])->name('company.story.updateTwo');
             Route::post('/company-story/update-section-three', [OurStoryController::class, 'updateSectionThree'])->name('company.story.updateThree');
 
-            Route::get('/mission/vision', [AboutPageController::class, 'missionVision'])->name('mission_vision.page');
+            Route::get('cta', [AboutPageCtaController::class, 'index'])->name('about_page.cta.index');
+            Route::post('cta/update', [AboutPageCtaController::class, 'update'])->name('about_page.cta.update');
+
+            Route::get('/founder', [FounderController::class, 'index'])->name('founder.index');
 
             Route::post('/chairman/mission/update', [AboutPageController::class, 'missionUpdate'])->name('mission.update');
             Route::post('/chairman/vision/update', [AboutPageController::class, 'visionUpdate'])->name('vision.update');
