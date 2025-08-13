@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
-@section('title', 'CTA')
+@section('title', 'Add Founder')
 @section('admin_content')
-    <div class="container-fluid">
+        <div class="container-fluid">
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
                 <div>
@@ -31,60 +31,71 @@
             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="">Talk to an Expert</h4>
+                        <h4 class="">Founder<span><a href="{{ route('founder.index') }}" class="btn btn-primary text-white text-uppercase text-bold right">
+                        All Founder
+                   </a></span</h4>
                     </div>
                     <div class="body">
-                        <form id="ctaCreateForm">
+                        <form id="founderCreateForm">
                             @csrf
 
                             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                                <label for="title"><b>Title</b></label>
+                                <label for="name"><b>Name</b></label>
                                 <div class="form-group">
                                     <div class="" style="border: 1px solid #ccc">
-                                        <input type="text" id="title" name="title" class="form-control"
-                                            placeholder="Enter Title "
-                                            value="{{ $aboutPageCta->title }}">
+                                        <input type="text" id="name" name="name" class="form-control"
+                                            placeholder="Enter Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
+                                <label for="designation"><b>Designation</b></label>
+                                <div class="form-group">
+                                    <div class="" style="border: 1px solid #ccc">
+                                        <input type="text" id="designation" name="designation" class="form-control"
+                                            placeholder="Enter designation ">
                                     </div>
                                 </div>
                             </div>
 
                            
-
                             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                                <label for="content"><b>Short Description</b></label>
+                                <label for="social_icon"><b>Social Icon Image</b></label>
                                 <div class="form-group">
                                     <div class="" style="border: 1px solid #ccc">
-                                        <textarea type="text" rows="4" name="content" class="form-control">{!! $aboutPageCta->content !!}</textarea>
+                                        <input type="file" id="social_icon" name="social_icon" class="form-control"
+                                            placeholder="Enter Social Icon ">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                                <label for="button_name"><b>Button Name</b></label>
+                                <label for="social_url"><b>Social Url</b></label>
                                 <div class="form-group">
                                     <div class="" style="border: 1px solid #ccc">
-                                        <input type="text" id="button_name" name="button_name" class="form-control"
-                                            placeholder="Enter button name "
-                                            value="{{ $aboutPageCta->button_name }}">
+                                        <input type="text" id="social_url" name="social_url" class="form-control"
+                                            placeholder="Enter Social Url ">
                                     </div>
                                 </div>
                             </div>
 
+
                             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                                <label for="button_url"><b>Button Url</b></label>
+                                <label for="image"><b>Image</b></label>
                                 <div class="form-group">
                                     <div class="" style="border: 1px solid #ccc">
-                                        <input type="text" id="button_url" name="button_url" class="form-control"
-                                            placeholder="Enter button url "
-                                            value="{{ $aboutPageCta->button_url }}">
+                                        <input type="file" id="image" name="image" class="form-control"
+                                            placeholder="Enter image ">
                                     </div>
                                 </div>
                             </div>
+
 
 
                             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7">
                                 <button type="submit"
-                                    class="btn btn-raised btn-primary m-t-15 waves-effect">UPDATE</button>
+                                    class="btn btn-raised btn-primary m-t-15 waves-effect">SAVE</button>
                             </div>
 
                         </form>
@@ -97,22 +108,27 @@
 
     </div>
 @endsection
+
 @push('scripts')
     <script>
         $(document).ready(function(){
-            $("#ctaCreateForm").submit(function(e){
+            $("#founderCreateForm").submit(function(e){
                 e.preventDefault();
 
-                let formData = $(this).serialize();
+                let formData = new FormData(this);
 
                 $.ajax({
-                    url:"{{ route('about_page.cta.update') }}",
-                    type: "POST",
+                    url:"{{ route('founder.store') }}",
+                    type:"POST",
                     data:formData,
-                    headers: {
+                    processData:false,
+                    contentType:false,
+                    headers:{
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     success:function(response){
+                        $("#founderCreateForm")[0].reset();
+
                         toastr.options = {
                             timeOut: 1500,
                             extendedTimeOut: 1000,
@@ -120,12 +136,11 @@
                             progressBar: true,
                             positionClass: 'toast-top-right'
                         };
-
                         toastr.success(response.message);
                     },
-                    error: ({ responseJSON }) => {
+                    error:function({ responseJSON }){
                         toastr.error(responseJSON?.message || 'Something went wrong!');
-                    },
+                    }
                 });
             });
         });

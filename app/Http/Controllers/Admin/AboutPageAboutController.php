@@ -18,4 +18,5 @@ class AboutPageAboutController extends Controller
             'message' => 'Data updated successfully!'
         ]);
     }
+    
 }

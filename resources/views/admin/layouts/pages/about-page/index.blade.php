@@ -36,7 +36,7 @@
                                 class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
                                 + Add CTA
                             </a>
-                            <a href="{{ route('founder.index') }}"
+                            <a href="{{ route('founder.create') }}"
                                 class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
                                 + Add Founder
                             </a>

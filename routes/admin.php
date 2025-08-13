@@ -149,6 +149,8 @@ Route::prefix('admin')
             Route::post('cta/update', [AboutPageCtaController::class, 'update'])->name('about_page.cta.update');
 
             Route::get('/founder', [FounderController::class, 'index'])->name('founder.index');
+            Route::get('/founder/create', [FounderController::class, 'create'])->name('founder.create');
+            Route::post('/founder/store', [FounderController::class, 'store'])->name('founder.store');
 
             Route::post('/chairman/mission/update', [AboutPageController::class, 'missionUpdate'])->name('mission.update');
             Route::post('/chairman/vision/update', [AboutPageController::class, 'visionUpdate'])->name('vision.update');
