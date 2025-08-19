@@ -180,7 +180,7 @@
                         <div class="dropdown-resources-menu">
                             <ul class="resources-list">
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('blog_page') }}">
                                         <i class="fas fa-blog blog-submenu-icon"></i>
                                         <span>Blog</span>
                                     </a>

@@ -14,6 +14,9 @@ Route::post('newslatter/store', [NewslatterController::class, 'store'])->name('n
 Route::get('About-page', [AboutPageController::class, 'index'])->name('about_page');
 
 Route::get('blog-page', [BlogController::class, 'index'])->name('blog_page');
+Route::get('blog-details/{id}', [BlogController::class, 'details'])->name('blog_page.details');
+Route::get('/category/{id}', [BlogController::class, 'categoryPosts'])->name('category.posts');
+
 
 
 
