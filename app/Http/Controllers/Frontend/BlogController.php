@@ -15,8 +15,8 @@ class BlogController extends Controller
         $posts = Post::with('category')->where('is_active', 1)->orderBy('created_at', 'desc')->paginate(10);
 
         $categories = Postcategory::withCount('posts')->get();
-        $totalPosts = Post::count();
-        return view('website.blog', compact('posts', 'categories', 'totalPosts'));
+
+        return view('website.blog', compact('posts', 'categories'));
     }
 
     public function details($id)
