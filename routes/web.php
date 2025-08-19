@@ -16,6 +16,8 @@ Route::get('About-page', [AboutPageController::class, 'index'])->name('about_pag
 Route::get('blog-page', [BlogController::class, 'index'])->name('blog_page');
 Route::get('blog-details/{id}', [BlogController::class, 'details'])->name('blog_page.details');
 Route::get('/category/{id}', [BlogController::class, 'categoryPosts'])->name('category.posts');
+Route::get('/search-posts', [BlogController::class, 'searchPosts'])->name('search.posts');
+
 
 
 

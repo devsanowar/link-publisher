@@ -10,16 +10,17 @@ use App\Models\Postcategory;
 
 class BlogController extends Controller
 {
-    public function index(){
-        $posts = Post::with('category')->where('is_active', 1)
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-        return view('website.blog', compact('posts'));
+    public function index()
+    {
+        $posts = Post::with('category')->where('is_active', 1)->orderBy('created_at', 'desc')->paginate(10);
 
-
+        $categories = Postcategory::withCount('posts')->get();
+        $totalPosts = Post::count();
+        return view('website.blog', compact('posts', 'categories', 'totalPosts'));
     }
 
-    public function details($id){
+    public function details($id)
+    {
         $post = Post::with('category')->findOrFail($id);
         $post->increment('views');
         $categories = Postcategory::withCount('posts')->get();
@@ -28,7 +29,6 @@ class BlogController extends Controller
 
         return view('website.blog_details', compact('post', 'categories', 'recentPosts'));
     }
-
 
     public function categoryPosts($id)
     {
@@ -39,5 +39,24 @@ class BlogController extends Controller
         return view('website.layouts.pages.blog.category_posts', compact('category', 'posts', 'categories'));
     }
 
+    public function searchPosts(Request $request)
+    {
+        $query = $request->get('query');
 
+        if ($query) {
+            $keywords = explode(' ', $query);
+
+            $posts = Post::where(function ($q) use ($keywords) {
+                foreach ($keywords as $word) {
+                    $q->orWhere('post_title', 'LIKE', '%' . $word . '%');
+                }
+            })->get();
+        } else {
+            $posts = Post::all();
+        }
+
+        return response()->json([
+            'html' => view('website.layouts.pages.blog.all-blog', compact('posts'))->render(),
+        ]);
+    }
 }
