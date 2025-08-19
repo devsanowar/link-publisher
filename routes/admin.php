@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\AboutPageAboutController;
 use App\Http\Controllers\Admin\AboutPageCtaController;
 use App\Http\Controllers\Admin\FounderController;
 use App\Http\Controllers\Admin\OurStoryController;
+use App\Http\Controllers\Admin\TeamController;
 
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])
@@ -140,7 +141,6 @@ Route::prefix('admin')
             Route::get('/', [AboutPageController::class, 'index'])->name('about_page.page');
             Route::post('/about/company/update', [AboutPageAboutController::class, 'update'])->name('about.company.update');
             Route::get('/company/story', [OurStoryController::class, 'index'])->name('company.story.index');
-
             Route::post('/company-story/update-section-one', [OurStoryController::class, 'updateSectionOne'])->name('company.story.updateOne');
             Route::post('/company-story/update-section-two', [OurStoryController::class, 'updateSectionTwo'])->name('company.story.updateTwo');
             Route::post('/company-story/update-section-three', [OurStoryController::class, 'updateSectionThree'])->name('company.story.updateThree');
@@ -148,9 +148,26 @@ Route::prefix('admin')
             Route::get('cta', [AboutPageCtaController::class, 'index'])->name('about_page.cta.index');
             Route::post('cta/update', [AboutPageCtaController::class, 'update'])->name('about_page.cta.update');
 
-            Route::get('/founder', [FounderController::class, 'index'])->name('founder.index');
-            Route::get('/founder/create', [FounderController::class, 'create'])->name('founder.create');
-            Route::post('/founder/store', [FounderController::class, 'store'])->name('founder.store');
+            
+
+            route::prefix('founder')->group(function(){
+                Route::get('/', [FounderController::class, 'index'])->name('founder.index');
+                Route::get('/create', [FounderController::class, 'create'])->name('founder.create');
+                Route::post('/store', [FounderController::class, 'store'])->name('founder.store');
+                Route::get('/edit/{id}', [FounderController::class, 'edit'])->name('founder.edit');
+                Route::post('/update', [FounderController::class, 'update'])->name('founder.update');
+                Route::delete('/destroy', [FounderController::class, 'destroy'])->name('founder.destroy');
+            });
+
+            route::prefix('team')->group(function(){
+                route::get('/', [TeamController::class, 'index'])->name('team.index');
+                route::get('/create', [TeamController::class, 'create'])->name('team.create');
+                route::post('/store', [TeamController::class, 'store'])->name('team.store');
+                route::get('/edit/{id}', [TeamController::class, 'edit'])->name('team.edit');
+                route::post('/update', [TeamController::class, 'update'])->name('team.update');
+                Route::delete('/destroy', [TeamController::class, 'destroy'])->name('team.destroy');
+                Route::post('/status-change', [TeamController::class, 'teamChangeStatus'])->name('team.status');
+            });
 
             Route::post('/chairman/mission/update', [AboutPageController::class, 'missionUpdate'])->name('mission.update');
             Route::post('/chairman/vision/update', [AboutPageController::class, 'visionUpdate'])->name('vision.update');

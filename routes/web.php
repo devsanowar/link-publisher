@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\AboutPageController;
+use App\Http\Controllers\Frontend\BlogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('newslatter/store', [NewslatterController::class, 'store'])->name('newslatter.store');
 
 Route::get('About-page', [AboutPageController::class, 'index'])->name('about_page');
+
+Route::get('blog-page', [BlogController::class, 'index'])->name('blog_page');
 
 
 

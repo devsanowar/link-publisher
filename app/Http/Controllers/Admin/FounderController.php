@@ -10,7 +10,8 @@ use Intervention\Image\Laravel\Facades\Image;
 class FounderController extends Controller
 {
     public function index(){
-        return view('admin.layouts.pages.about-page.founder.index');
+        $founders = Founder::select(['id','name','designation','social_icon','social_url','image'])->latest()->get();
+        return view('admin.layouts.pages.about-page.founder.index', compact('founders'));
     }
 
     public function create(){
@@ -44,7 +45,82 @@ class FounderController extends Controller
     }
 
 
+    public function edit($id){
+        $founder = Founder::findOrFail($id);
+        return view('admin.layouts.pages.about-page.founder.edit', compact('founder'));
+    }
+    
 
+    public function update(Request $request){
+        $founder = Founder::findOrFail($request->id);
+
+        $socialNewIcon = $this->SocialIcon($request);
+        if($socialNewIcon){
+            if (!empty($founder->social_icon)) {
+                $oldImagePath = public_path($founder->social_icon);
+                if (file_exists($oldImagePath) && is_file($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+            $founder->social_icon = $socialNewIcon;
+        }
+
+        $founderNewImage = $this->founderImage($request);
+        if($founderNewImage){
+            if(!empty($founder->image)){
+                $oldImagePath = public_path($founder->image);
+                if(file_exists($oldImagePath) && is_file($oldImagePath)){
+                    unlink($oldImagePath);
+                }
+            }
+            $founder->image = $founderNewImage;
+        }
+
+        $founder->update([
+            'name' => $request->name,
+            'designation' => $request->designation,
+            'social_icon' => $founder->social_icon,
+            'social_url' => $request->social_url,
+            'image' => $founder->image,
+        ]);
+
+            return response()->json([
+                'message' => 'Data updated successfully!',
+                'social_icon_path' => $founder->social_icon ? asset($founder->social_icon) : null,
+                'image_path' => $founder->image ? asset($founder->image) : null
+            ]);
+
+    }
+
+
+    public function destroy(Request $request){
+        $founder = Founder::findOrFail($request->id);
+        if($founder){
+            if (!empty($founder->social_icon)) {
+                $oldImagePath = public_path($founder->social_icon);
+                if (file_exists($oldImagePath) && is_file($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+        }
+
+        if($founder){
+            if (!empty($founder->image)) {
+                $oldImagePath = public_path($founder->image);
+                if (file_exists($oldImagePath) && is_file($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+        }
+
+        $founder->delete();
+
+        return response()->json([
+            'message' => 'Data Successfully deleted!'
+        ]);
+
+
+    }
 
 
 

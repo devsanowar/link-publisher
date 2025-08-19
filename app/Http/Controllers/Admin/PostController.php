@@ -81,7 +81,7 @@ class PostController extends Controller
         $post = Post::find($id);
         $postNewImage = $this->postImage($request);
         if($postNewImage){
-            if (!empty($service->image)) {
+            if (!empty($post->image)) {
                 $oldImagePath = public_path($post->image);
                 if (file_exists($oldImagePath) && is_file($oldImagePath)) {
                     unlink($oldImagePath);

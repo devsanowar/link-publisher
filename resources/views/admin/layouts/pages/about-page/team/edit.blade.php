@@ -1,26 +1,32 @@
 @extends('admin.layouts.app')
-@section('title', 'Add Founder')
+@section('title', 'Edit Team')
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('backend') }}/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+@endpush
 @section('admin_content')
     <div class="container-fluid">
+        
         @include('admin.layouts.pages.about-page.about-menu')
+
 
         <!-- Horizontal Layout -->
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="">Founder<span><a href="{{ route('founder.index') }}" class="btn btn-primary text-white text-uppercase text-bold right"> All Founder </a></span< /h4>
+                        <h4 class="">Edit Team<span><a href="{{ route('team.index') }}" class="btn btn-primary text-white text-uppercase text-bold right"> All team members </a></span< /h4>
                     </div>
                     <div class="body">
-                        <form id="founderCreateForm">
+                        <form id="teamUpdateForm">
                             @csrf
 
+                            <input type="hidden" name="id" value="{{ $team->id }}">
                             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
                                 <label for="name"><b>Name</b></label>
                                 <div class="form-group">
                                     <div class="" style="border: 1px solid #ccc">
                                         <input type="text" id="name" name="name" class="form-control"
-                                            placeholder="Enter Name">
+                                            placeholder="Enter Name" value="{{ $team->name }}">
                                     </div>
                                 </div>
                             </div>
@@ -30,28 +36,7 @@
                                 <div class="form-group">
                                     <div class="" style="border: 1px solid #ccc">
                                         <input type="text" id="designation" name="designation" class="form-control"
-                                            placeholder="Enter designation ">
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                                <label for="social_icon"><b>Social Icon Image</b></label>
-                                <div class="form-group">
-                                    <div class="" style="border: 1px solid #ccc">
-                                        <input type="file" id="social_icon" name="social_icon" class="form-control"
-                                            placeholder="Enter Social Icon ">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
-                                <label for="social_url"><b>Social Url</b></label>
-                                <div class="form-group">
-                                    <div class="" style="border: 1px solid #ccc">
-                                        <input type="text" id="social_url" name="social_url" class="form-control"
-                                            placeholder="Enter Social Url ">
+                                            placeholder="Enter designation " value="{{ $team->designation }}">
                                     </div>
                                 </div>
                             </div>
@@ -64,13 +49,24 @@
                                         <input type="file" id="image" name="image" class="form-control"
                                             placeholder="Enter image ">
                                     </div>
+                                    <img id="teamImagePreview" class="mt-2" src="{{ asset($team->image) }}" alt="team Image" width="60">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7 mb-3">
+                                <label for="image"><b>Status</b></label>
+                                <div class="form-group">
+                                    <select name="status" class="form-control show-tick">
+                                        <option disabled selected>Select Status....</option>
+                                        <option value="1" {{ $team->status === 1 ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ $team->status === 0 ? 'selected' : '' }}>DeActive</option>
+                                    </select>
                                 </div>
                             </div>
 
 
-
                             <div class="col-lg-12 col-md-12 col-sm-8 col-xs-7">
-                                <button type="submit" class="btn btn-raised btn-primary m-t-15 waves-effect">SAVE</button>
+                                <button type="submit" class="btn btn-raised btn-primary m-t-15 waves-effect">UPDATE</button>
                             </div>
 
                         </form>
@@ -87,13 +83,13 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $("#founderCreateForm").submit(function(e) {
+            $("#teamUpdateForm").submit(function(e) {
                 e.preventDefault();
 
                 let formData = new FormData(this);
 
                 $.ajax({
-                    url: "{{ route('founder.store') }}",
+                    url: "{{ route('team.update') }}",
                     type: "POST",
                     data: formData,
                     processData: false,
@@ -102,8 +98,6 @@
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        $("#founderCreateForm")[0].reset();
-
                         toastr.options = {
                             timeOut: 1500,
                             extendedTimeOut: 1000,
@@ -112,6 +106,11 @@
                             positionClass: 'toast-top-right'
                         };
                         toastr.success(response.message);
+                       
+                        if(response.image_path){
+                            $("#teamImagePreview").attr("src", response.image_path);
+                        }
+
                     },
                     error: function({
                         responseJSON
