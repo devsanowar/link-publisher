@@ -74,6 +74,19 @@
             </li>
 
 
+            <li class="">
+                <a href="javascript:void(0);" class="menu-toggle">
+                    <i class="zmdi zmdi-view-headline"></i>
+                    <span>Services</span>
+                </a>
+                <ul class="ml-menu">
+                    <li class="">
+                        <a href="{{ route('link_building.index') }}"><span>Link Building</span></a>
+                    </li>
+                </ul>
+            </li>
+
+
 
 
             <li class="{{ $isOrderPageActive ? 'active' : '' }}">

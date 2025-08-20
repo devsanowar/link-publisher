@@ -12,7 +12,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="">Add Team<span><a href="{{ route('team.index') }}" class="btn btn-primary text-white text-uppercase text-bold right"> All team members </a></span< /h4>
+                        <h4 class="">Add Team<span><a href="{{ route('team.index') }}" class="btn btn-primary text-white text-uppercase text-bold right"> All team members </a></span> </h4>
                     </div>
                     <div class="body">
                         <form id="teamCreateForm">
