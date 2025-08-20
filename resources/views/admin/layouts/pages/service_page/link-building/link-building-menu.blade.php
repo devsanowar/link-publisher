@@ -6,8 +6,8 @@
                     <a href="{{ route('link_building.packages.create') }}" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
                         + Add package pricing
                     </a>
-                    <a href="" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
-                        + Add CTA
+                    <a href="{{ route('whychose.link_builder.create') }}" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
+                        + Add Why Chose Us
                     </a>
                     <a href="" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
                         + Add Founder

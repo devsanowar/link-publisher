@@ -14,6 +14,8 @@
 <script src="{{ asset('backend') }}/assets/js/toastr.min.js"></script>
 
 
+
+
 {!! Toastr::message() !!}
 
 @if ($errors->any())

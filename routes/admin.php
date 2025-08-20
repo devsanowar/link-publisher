@@ -38,6 +38,7 @@ use App\Http\Controllers\Admin\LinkBuildingController;
 use App\Http\Controllers\Admin\LinkBuildingPackageController;
 use App\Http\Controllers\Admin\OurStoryController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\WhyChoseusLinkBuilderController;
 use App\Models\LinkBuildingPackage;
 
 Route::prefix('admin')
@@ -195,6 +196,14 @@ Route::prefix('admin')
                 Route::post('/update', [LinkBuildingPackageController::class, 'update'])->name('link_building.packages.update');
                 Route::delete('/destroy', [LinkBuildingPackageController::class, 'destroy'])->name('link_building.packages.destroy');
                 Route::post('/status-change', [LinkBuildingPackageController::class, 'packageChangeStatus'])->name('package.status');
+            });
+
+            Route::prefix('why-chose-link-building-agency')->group(function () {
+                Route::get('/', [WhyChoseusLinkBuilderController::class, 'index'])->name('whychose.link_builder.index');
+                Route::get('/create', [WhyChoseusLinkBuilderController::class, 'create'])->name('whychose.link_builder.create');
+                Route::post('/store', [WhyChoseusLinkBuilderController::class, 'store'])->name('whychose.link_builder.store');
+                Route::get('/edit/{id}', [WhyChoseusLinkBuilderController::class, 'edit'])->name('whychose.link_builder.edit');
+                Route::post('/update', [WhyChoseusLinkBuilderController::class, 'update'])->name('whychose.link_builder.update');
             });
 
         });
