@@ -9,11 +9,11 @@
                     <a href="{{ route('whychose.link_builder.create') }}" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
                         + Add Why Chose Us
                     </a>
-                    <a href="" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
-                        + Add Founder
+                    <a href="{{ route('build.backlink.index') }}" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
+                        + Update Backlinks
                     </a>
-                    <a href="" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
-                        + Add Team
+                    <a href="{{ route('link.building.process.index') }}" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
+                        + Create Link building process
                     </a>
                 </div>
             </h4>

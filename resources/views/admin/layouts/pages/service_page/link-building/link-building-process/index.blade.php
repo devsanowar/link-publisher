@@ -1,61 +1,67 @@
 @extends('admin.layouts.app')
-@section('title', 'Founder')
+@section('title', 'Link building Proccess')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('backend') }}/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/sweetalert2.min.css">
+<link rel="stylesheet" href="{{ asset('backend') }}/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+
 @endpush
 @section('admin_content')
     <div class="container-fluid">
-        @include('admin.layouts.pages.service_page.link-building.link-building-menu')
+         @include('admin.layouts.pages.service_page.link-building.link-building-menu')
 
         <!-- Horizontal Layout -->
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="">Create Why chose link builder<span><a href="{{ route('whychose.link_builder.create') }}"
-                                    class="btn btn-primary text-white text-uppercase text-bold right">
-                                    + Add New
-                                </a></span< /h4>
+                        <h4 class="">Link Building Process
+                            <span>
+                                <!-- Button to trigger modal -->
+                                <a href="{{ route('link.building.process.create') }}"
+                                    class="btn btn-primary text-white text-uppercase text-bold right"> Create Link
+                                    building Process </a>
+                            </span>
+                        </h4>
                     </div>
                     <div class="body table-responsive">
                         <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Icon</th>
-                                    <th>Title</th>
+                                    <th>title</th>
                                     <th>Description</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($whyChoseusLinkBuilders as $index => $whyChoseusLinkBuilder)
+                                @foreach ($linkBuildingProcesses as $index => $linkBuildingProcess)
                                 <tr>
                                     <td>{{ $index+1 }}</td>
-                                    <td>{{ $whyChoseusLinkBuilder->icon }}</td>
-                                    <td>{{ $whyChoseusLinkBuilder->title }}</td>
-                                    <td>{!! Str::limit($whyChoseusLinkBuilder->description, 100, '...') !!}</td>
+                                    <td>{{ $linkBuildingProcess->title }}</td>
+                                    <td>{!! Str::limit($linkBuildingProcess->description, 100, '...') !!}</td>
                                     <td>
-                                        <button data-id="{{ $whyChoseusLinkBuilder->id }}"
-                                            class="btn btn-sm status-toggle-btn {{ $whyChoseusLinkBuilder->is_active ? 'btn-success' : 'btn-danger' }}">
-                                            {{ $whyChoseusLinkBuilder->is_active ? 'Active' : 'DeActive' }}
-                                        </button>
+                                       <button data-id="{{ $linkBuildingProcess->id }}"
+                                            class="btn btn-sm status-toggle-btn {{ $linkBuildingProcess->is_active ? 'btn-success' : 'btn-danger' }}">
+                                            {{ $linkBuildingProcess->is_active ? 'Active' : 'DeActive' }}
+                                        </button> 
                                     </td>
+
                                     <td>
-                                    <a href="{{ route('whychose.link_builder.edit', $whyChoseusLinkBuilder->id) }}" class="btn btn-warning btn-sm"> <i class="material-icons text-white">edit</i></a>
+                                    <a href="{{ route('link.building.process.edit', $linkBuildingProcess->id) }}" class="btn btn-warning btn-sm"> <i class="material-icons text-white">edit</i></a>
 
 
-                                    <form class="deleteWhychoseLinkBuilding d-inline-block" method="POST">
+                                    <form class="deleteFounder d-inline-block" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="hidden" class="whychoseID" name="id" value="{{ $whyChoseusLinkBuilder->id }}">
+                                        <input type="hidden" class="linkProcessID" name="id" value="{{ $linkBuildingProcess->id }}">
                                         <button type="submit" class="btn btn-danger btn-sm show_confirm">
                                             <i class="material-icons">delete</i>
                                         </button>
                                     </form>
- 
+
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -64,7 +70,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
 
@@ -86,13 +91,16 @@
 <script src="{{ asset('backend') }}/assets/js/sweetalert2.all.min.js"></script>
 
 <script>
+
+
+// link building process delete functionality
 $(document).ready(function () {
 
     $('.show_confirm').click(function(e){
         e.preventDefault();
 
         let form = $(this).closest('form');
-        let whychoseId = form.find('.whychoseID').val(); // hidden input থেকে id নাও
+        let linkProcessId = form.find('.linkProcessID').val(); // hidden input থেকে id নাও
 
         Swal.fire({
             title: "Are you sure?",
@@ -106,10 +114,10 @@ $(document).ready(function () {
             if (result.isConfirmed) {
                 // AJAX call
                 $.ajax({
-                    url: "{{ route('whychose.link_builder.destroy') }}",
+                    url: "{{ route('link.building.process.destroy') }}",
                     type: "DELETE",
                     data: {
-                        id: whychoseId,
+                        id: linkProcessId,
                         _token: '{{ csrf_token() }}'
                     },
                     success: function (response) {
@@ -135,22 +143,20 @@ $(document).ready(function () {
     });
 
 });
-</script>
 
-<script>
-        // Status change functionality
-        $(document).on('click', '.status-toggle-btn', function(e) {
+// Status toggle functionality
+$(document).on('click', '.status-toggle-btn', function(e) {
             e.preventDefault();
 
             let button = $(this);
-            let linkbuildingId = button.data('id');
+            let teamId = button.data('id');
 
             $.ajax({
-                url: "{{ route('whychose.link_builder.status') }}",
+                url: "{{ route('link.building.process.status') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    id: linkbuildingId
+                    id: teamId
                 },
                 success: function(response) {
                     if (response.status) {
@@ -170,10 +176,7 @@ $(document).ready(function () {
                 }
             });
         });
-    </script>
+</script>
 
 
 @endpush
-
-
-

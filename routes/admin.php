@@ -33,9 +33,11 @@ use App\Http\Controllers\Admin\WebsiteSettingController;
 use App\Http\Controllers\Admin\TermsAdnCondiotnController;
 use App\Http\Controllers\Admin\AboutPageAboutController;
 use App\Http\Controllers\Admin\AboutPageCtaController;
+use App\Http\Controllers\Admin\BuildBacklinkController;
 use App\Http\Controllers\Admin\FounderController;
 use App\Http\Controllers\Admin\LinkBuildingController;
 use App\Http\Controllers\Admin\LinkBuildingPackageController;
+use App\Http\Controllers\Admin\LinkBuildingProcessController;
 use App\Http\Controllers\Admin\OurStoryController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\WhyChoseusLinkBuilderController;
@@ -174,6 +176,7 @@ Route::prefix('admin')
             Route::post('/status-change', [TeamController::class, 'teamChangeStatus'])->name('team.status');
         });
 
+        
         Route::post('/chairman/mission/update', [AboutPageController::class, 'missionUpdate'])->name('mission.update');
         Route::post('/chairman/vision/update', [AboutPageController::class, 'visionUpdate'])->name('vision.update');
     });
@@ -204,6 +207,23 @@ Route::prefix('admin')
                 Route::post('/store', [WhyChoseusLinkBuilderController::class, 'store'])->name('whychose.link_builder.store');
                 Route::get('/edit/{id}', [WhyChoseusLinkBuilderController::class, 'edit'])->name('whychose.link_builder.edit');
                 Route::post('/update', [WhyChoseusLinkBuilderController::class, 'update'])->name('whychose.link_builder.update');
+                Route::delete('/destroy', [WhyChoseusLinkBuilderController::class, 'destroy'])->name('whychose.link_builder.destroy');
+                Route::post('/status-change', [WhyChoseusLinkBuilderController::class, 'whyChosaeLinkBuildingStatus'])->name('whychose.link_builder.status');
+            });
+
+            Route::prefix('build-backlinks')->group(function () {
+                Route::get('/', [BuildBacklinkController::class, 'index'])->name('build.backlink.index');
+                Route::post('/update', [BuildBacklinkController::class, 'update'])->name('build.backlink.update');
+            });
+
+            Route::prefix('link-building-process')->group(function(){
+                route::get('/', [LinkBuildingProcessController::class, 'index'])->name('link.building.process.index');
+                route::get('/create', [LinkBuildingProcessController::class, 'create'])->name('link.building.process.create');
+                route::post('/store', [LinkBuildingProcessController::class, 'store'])->name('link.building.process.store');
+                route::get('/edit/{id}', [LinkBuildingProcessController::class, 'edit'])->name('link.building.process.edit');
+                route::post('/update', [LinkBuildingProcessController::class, 'update'])->name('link.building.process.update');
+                Route::delete('/destroy', [LinkBuildingProcessController::class, 'destroy'])->name('link.building.process.destroy');
+                Route::post('/status-change', [LinkBuildingProcessController::class, 'linkProcessChangeStatus'])->name('link.building.process.status');
             });
 
         });

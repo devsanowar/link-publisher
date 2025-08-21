@@ -48,6 +48,7 @@ class TeamController extends Controller
 
 
     public function update(Request $request){
+        
         $team = Team::findOrFail($request->id);
         
         $teamNewImage = $this->teamImage($request);

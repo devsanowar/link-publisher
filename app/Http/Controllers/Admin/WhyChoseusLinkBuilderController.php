@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class WhyChoseusLinkBuilderController extends Controller
 {
     public function index(){
-        $whyChoseusLinkBuilders = WhychoseUsLinkBuilder::select(['id','icon','description','is_active'])->latest()->get();
+        $whyChoseusLinkBuilders = WhychoseUsLinkBuilder::select(['id','title','icon','description','is_active'])->latest()->get();
         return view('admin.layouts.pages.service_page.link-building.why-choseus-link-building.index', compact('whyChoseusLinkBuilders'));
     }
 
@@ -63,6 +63,35 @@ class WhyChoseusLinkBuilderController extends Controller
             'status' => 'success',
             'message' => 'Data updated successfully!',
             'data' => $whyChoseusLinkBuilder,
+        ]);
+    }
+
+    public function destroy(Request $request){
+        $whychoseLinkBuilding = WhychoseUsLinkBuilder::findOrFail($request->id);
+
+        $whychoseLinkBuilding->delete();
+
+        return response()->json([
+            'message' => 'Data Successfully deleted!'
+        ]);
+    }
+
+    public function whyChosaeLinkBuildingStatus(Request $request)
+    {
+        $whychoseLinkBuilding = WhychoseUsLinkBuilder::find($request->id);
+
+        if (!$whychoseLinkBuilding) {
+            return response()->json(['status' => false, 'message' => 'Data not found.']);
+        }
+
+        $whychoseLinkBuilding->is_active = !$whychoseLinkBuilding->is_active;
+        $whychoseLinkBuilding->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Status changed successfully.',
+            'new_status' => $whychoseLinkBuilding->is_active ? 'Active' : 'DeActive',
+            'class' => $whychoseLinkBuilding->is_active ? 'btn-success' : 'btn-danger',
         ]);
     }
 
