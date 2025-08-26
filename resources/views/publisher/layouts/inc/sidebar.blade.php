@@ -16,7 +16,7 @@
                     Affiliate Program</a>
                 <a class="nav-link" href="dashboard-free-seo.html"><i class="fas fa-tools me-2"></i> Free SEO Tools
                     <span class="badge bg-warning text-dark">New</span></a>
-                <a class="nav-link" href="dashboard-seo-service.html"><i class="fas fa-search-dollar me-2"></i> SEO
+                <a class="nav-link" href="{{ route('seo_service.page') }}"><i class="fas fa-search-dollar me-2"></i> SEO
                     Services</a>
             </nav>
 

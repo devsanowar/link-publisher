@@ -103,6 +103,12 @@
         $(document).ready(function() {
             $('#BuildBacklinkFormUpdate').on('submit', function(e) {
                 e.preventDefault();
+
+                    for (instance in CKEDITOR.instances) {
+                        CKEDITOR.instances[instance].updateElement();
+                    }
+
+
                 let formData = new FormData(this);
 
                 $.ajax({

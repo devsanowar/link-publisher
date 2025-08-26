@@ -12,7 +12,7 @@ class LinkBuildingPackageController extends Controller
 {
     public function index()
     {
-        $packages = LinkBuildingPackage::all();
+        $packages = LinkBuildingPackage::where('is_active', 1)->get();
         return view('admin.layouts.pages.service_page.link-building.link-building-package.index', compact('packages'));
     }
 

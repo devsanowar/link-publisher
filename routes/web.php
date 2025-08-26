@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\LinkBuildingController;
 use App\Http\Controllers\Frontend\AboutPageController;
 use App\Http\Controllers\Frontend\BlogController;
 use Illuminate\Http\Request;
@@ -17,6 +18,9 @@ Route::get('blog-page', [BlogController::class, 'index'])->name('blog_page');
 Route::get('blog-details/{id}', [BlogController::class, 'details'])->name('blog_page.details');
 Route::get('/category/{id}', [BlogController::class, 'categoryPosts'])->name('category.posts');
 Route::get('/search-posts', [BlogController::class, 'searchPosts'])->name('search.posts');
+
+
+Route::get('service-page/link-building', [LinkBuildingController::class, 'index'])->name('service.link-building.index');
 
 
 

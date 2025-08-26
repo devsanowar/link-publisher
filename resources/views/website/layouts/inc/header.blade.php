@@ -13,7 +13,7 @@
                             <div class="mega-item">
                                 <i class="fas fa-link dropdown-icon"></i>
                                 <div>
-                                    <h6> <a href="services-link-building.html">Link Building</a></h6>
+                                    <h6> <a href="{{ route('service.link-building.index') }}">Link Building</a></h6>
                                     <p>Improve rankings with backlinks.</p>
                                 </div>
                             </div>

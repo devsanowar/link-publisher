@@ -86,6 +86,12 @@
                 </ul>
             </li>
 
+            <li class="">
+                <a href="{{ route('seo_service.index') }}">
+                    <i class="zmdi zmdi-assignment"></i><span>Seo Service</span>
+                </a>
+            </li>
+
 
 
 

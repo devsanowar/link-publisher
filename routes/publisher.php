@@ -5,6 +5,7 @@ use App\Http\Controllers\Publisher\DashboardController;
 use App\Http\Controllers\Auth\Publisher\LoginController;
 use App\Http\Controllers\Auth\Publisher\RegisterController;
 use App\Http\Controllers\Publisher\ProfileSettingController;
+use App\Http\Controllers\Publisher\SeoServiceController;
 use App\Http\Controllers\Publisher\WebsiteOrderController;
 
 Route::prefix('publisher')->group(function () {
@@ -27,5 +28,8 @@ Route::prefix('publisher')->group(function () {
         Route::get('website/order', [WebsiteOrderController::class, 'index'])->name('website.index');
         Route::get('website/order/create', [WebsiteOrderController::class, 'create'])->name('website.create');
         Route::post('publisher/website/order', [WebsiteOrderController::class, 'store'])->name('website.store');
+
+        // Seo Service package
+        Route::get('seo-services', [SeoServiceController::class, 'seoServicePage'])->name('seo_service.page');
     });
 });

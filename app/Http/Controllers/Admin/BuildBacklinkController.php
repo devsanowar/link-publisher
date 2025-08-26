@@ -19,7 +19,7 @@ class BuildBacklinkController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1000',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:500',
         ]);
 
@@ -37,7 +37,7 @@ class BuildBacklinkController extends Controller
         }
         $buildBacklink->update([
             'title' => $request->title,
-            'count_number' => $request->count_number,
+            'description' => $request->description,
             'image' => $buildBacklink->image,
         ]);
 

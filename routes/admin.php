@@ -1,12 +1,13 @@
 <?php
 
+use App\Models\LinkBuildingPackage;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CtaController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\AboutLinkBuilderController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\InboxController;
@@ -14,34 +15,36 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\FounderController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\OurStoryController;
 use App\Http\Controllers\Admin\AboutPageController;
 use App\Http\Controllers\Admin\BlocklistController;
 use App\Http\Controllers\Admin\AdminPanelController;
 use App\Http\Controllers\Admin\NewslatterController;
+use App\Http\Controllers\Admin\SeoServiceController;
 use App\Http\Controllers\Admin\SocialIconController;
 use App\Http\Controllers\Admin\VisitorLogController;
 use App\Http\Controllers\Admin\WhyChoseUsController;
 use App\Http\Controllers\Admin\AchievementController;
 use App\Http\Controllers\Admin\PromobannerController;
+use App\Http\Controllers\Admin\AboutPageCtaController;
+use App\Http\Controllers\Admin\LinkBuildingController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\ReturnrefundController;
 use App\Http\Controllers\Admin\WebsiteColorController;
+use App\Http\Controllers\Admin\BuildBacklinkController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\PrivacypolicyController;
-use App\Http\Controllers\Admin\WebsiteSettingController;
-use App\Http\Controllers\Admin\TermsAdnCondiotnController;
 use App\Http\Controllers\Admin\AboutPageAboutController;
-use App\Http\Controllers\Admin\AboutPageCtaController;
-use App\Http\Controllers\Admin\BuildBacklinkController;
-use App\Http\Controllers\Admin\FounderController;
-use App\Http\Controllers\Admin\LinkBuildingController;
+use App\Http\Controllers\Admin\WebsiteSettingController;
+use App\Http\Controllers\Admin\AboutLinkBuilderController;
+use App\Http\Controllers\Admin\TermsAdnCondiotnController;
+use App\Http\Controllers\Admin\LinkBuildingReasonController;
 use App\Http\Controllers\Admin\LinkBuildingPackageController;
 use App\Http\Controllers\Admin\LinkBuildingProcessController;
-use App\Http\Controllers\Admin\OurStoryController;
-use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\LinkBuildingSolutionController;
 use App\Http\Controllers\Admin\WhyChoseusLinkBuilderController;
-use App\Models\LinkBuildingPackage;
 
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])
@@ -217,13 +220,32 @@ Route::prefix('admin')
             });
 
             Route::prefix('link-building-process')->group(function(){
-                route::get('/', [LinkBuildingProcessController::class, 'index'])->name('link.building.process.index');
-                route::get('/create', [LinkBuildingProcessController::class, 'create'])->name('link.building.process.create');
-                route::post('/store', [LinkBuildingProcessController::class, 'store'])->name('link.building.process.store');
-                route::get('/edit/{id}', [LinkBuildingProcessController::class, 'edit'])->name('link.building.process.edit');
-                route::post('/update', [LinkBuildingProcessController::class, 'update'])->name('link.building.process.update');
+                Route::get('/', [LinkBuildingProcessController::class, 'index'])->name('link.building.process.index');
+                Route::get('/create', [LinkBuildingProcessController::class, 'create'])->name('link.building.process.create');
+                Route::post('/store', [LinkBuildingProcessController::class, 'store'])->name('link.building.process.store');
+                Route::get('/edit/{id}', [LinkBuildingProcessController::class, 'edit'])->name('link.building.process.edit');
+                Route::post('/update', [LinkBuildingProcessController::class, 'update'])->name('link.building.process.update');
                 Route::delete('/destroy', [LinkBuildingProcessController::class, 'destroy'])->name('link.building.process.destroy');
                 Route::post('/status-change', [LinkBuildingProcessController::class, 'linkProcessChangeStatus'])->name('link.building.process.status');
+            });
+
+            Route::prefix('link-building-solution')->group(function(){
+                Route::get('/', [LinkBuildingSolutionController::class, 'index'])->name('link.building.solution.index');
+                Route::post('/update', [LinkBuildingSolutionController::class, 'update'])->name('link.building.solution.update');
+            });
+
+            Route::prefix('link-building-reason')->group(function(){
+                Route::get('/', [LinkBuildingReasonController::class, 'index'])->name('link.building.reason.index');
+                route::post('/update', [LinkBuildingReasonController::class, 'update'])->name('link.building.reason.update');
+
+                // Link building reason feature
+                Route::post('/reatures/store', [LinkBuildingReasonController::class, 'featureStore'])->name('link.building.reason.features.store');
+
+                Route::get('/feature/{id}', [LinkBuildingReasonController::class, 'edit'])->name('link-building-reason.edit');
+                Route::put('/feature/{id}/update', [LinkBuildingReasonController::class, 'updateReason'])->name('link-building-reason.update');
+
+                Route::delete('feature/destroy/', [LinkBuildingReasonController::class, 'destroy'])->name('link-building-reason.destroy');
+
             });
 
         });
@@ -291,6 +313,17 @@ Route::prefix('admin')
     // Website Color routes
     Route::get('website-color', [WebsiteColorController::class, 'edit'])->name('website_color.edit');
     Route::put('/website-color/update/{id}', [WebsiteColorController::class, 'update'])->name('website_color.update');
+
+    // Seo Service routes
+    Route::prefix('seo-service')->group(function(){
+        Route::get('/', [SeoServiceController::class, 'index'])->name('seo_service.index');
+        Route::get('/create', [SeoServiceController::class, 'create'])->name('seo_service.create');
+        Route::post('/store', [SeoServiceController::class, 'store'])->name('seo_service.store');
+        Route::get('/edit/{id}', [SeoServiceController::class, 'edit'])->name('seo_service.edit');
+        Route::post('/update', [SeoServiceController::class, 'update'])->name('seo_service.update');
+        Route::delete('/destroy/', [SeoServiceController::class, 'destroy'])->name('seo_service.destroy');
+    });
+
 });
 
 Route::middleware(['visitorlogger'])->group(function () {

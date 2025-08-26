@@ -15,6 +15,13 @@
                     <a href="{{ route('link.building.process.index') }}" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
                         + Create Link building process
                     </a>
+
+                    <a href="{{ route('link.building.solution.index') }}" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
+                        + Create Link building solution
+                    </a>
+                    <a href="{{ route('link.building.reason.index') }}" class="btn btn-primary text-white text-uppercase font-weight-bold mx-2">
+                        + Create Link building reason
+                    </a>
                 </div>
             </h4>
         </div>
